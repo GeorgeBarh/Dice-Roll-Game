@@ -7,7 +7,13 @@
     <title>Dice Roll Game!</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <!--Google font-->
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Luckiest+Guy&display=swap"
+        rel="stylesheet">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -16,19 +22,45 @@
         <section class="introduction">
 
             <h1>Dice Roll Game!</h1>
-            <p id="game-description">The challenge of the game is to roll a specific number on the dice based on the
-                type of game and the level
-                of difficulty. </p>
+            <p id="game-description">The challenge of the game is to roll a number higher than a specific target on the
+                dice, based on the difficulty level. You have only 3 tries to succeed! </p>
 
+            <div class="font-icons">
+
+                <i class="fa-solid fa-dice-one"></i>
+                <i class="fa-solid fa-dice-two"></i>
+                <i class="fa-solid fa-dice-three"></i>
+                <i class="fa-solid fa-dice-four"></i>
+                <i class="fa-solid fa-dice-five"></i>
+                <i class="fa-solid fa-dice-six"></i>
+            </div>
             <button id="start-button" data-type="play">Let's Play!</button>
 
+
         </section>
+
 
     </header>
 
     <main>
+        <section class="game-area">
 
+
+        </section>
+
+        <div class="score-area">
+            <p>Your tries: <span></span></p>
+            <p>Your score:<span></span></p>
+        </div>
+
+        <div class="versus-computer">
+
+            <p>Do you think you can beat the computer?</p>
+            <button><span>Play versus the computer</span></button>
+
+        </div>
     </main>
+
 
 
     <footer>

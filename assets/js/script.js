@@ -3,15 +3,18 @@
 // Get the button elements and add event listeners to them
 
 document.addEventListener("DOMContentLoaded", function () {
-    let startButton = document.getElementById('start-button')
-    startButton.addEventListener("click", function () {
-        letsPlay();
-    })
+    letsPlay();
+
 })
 
 function letsPlay() {
-    let gameArea = document.getElementsByTagName('main')[0]
-    gameArea.innerHTML = `<section class="game-area">
+    let startButton = document.getElementById('start-button')
+    startButton.addEventListener("click", function () {
+        hideContent();
+        let gameArea = document.getElementsByClassName('game-area')[0]
+        gameArea.innerHTML = `
+
+    <div class="game-questions">
 
         <div class="game-selection">
 
@@ -29,20 +32,26 @@ function letsPlay() {
             <button>Easy</button>
             <button>Medium</button>
             <button>Hard</button>
-        </div>
-
-        <div class="versus-computer">
-
-            <p>Do you think you can beat the computer?</p>
-            <button><span>Play versus the computer</span></button>
 
         </div>
+        
+    </div>
 
-        <div class="score-area">
-            <p>Your tries: <span></span></p>
-            <p>Your score:<span></span></p>
+        <div class="game">
         </div>
-    </section>`
 
+
+
+
+        `
+
+    })
+}
+
+function hideContent() {
+    let startButton = document.getElementById('start-button')
+    startButton.style.display = "none";
+    let gameDescription = document.getElementById('game-description')
+    gameDescription.style.display = "none";
 }
 
