@@ -125,9 +125,15 @@ main {
 .game {
     border: 1px solid black;
     height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.roll-btn {
+
+
+#roll-btn {
     width: 50%;
     font-size: 100%;
     padding: 5px 5px;

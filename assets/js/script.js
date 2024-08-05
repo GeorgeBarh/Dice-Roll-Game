@@ -26,7 +26,9 @@ function letsPlay() {
                 </div>
             </div>
             <div class="game">
-                <button class="roll-btn" data-type="submit">Roll!</button>
+                <span id= "firstDie" class="dice-result"></span>
+                <span id= "secondDie" class="dice-result"></span>
+                <button id="roll-btn" data-type="submit">Roll!</button>
             </div>
             <div class="score-area">
                 <p>Your tries: <span></span></p>
@@ -40,6 +42,7 @@ function letsPlay() {
         // Call the function to attach event listeners after adding content
         chooseGame();
         setUpDifficulty();
+        runGame();
     });
 }
 
@@ -103,4 +106,27 @@ function setUpDifficulty() {
             }
         });
     }
+}
+
+
+function runGame() {
+    let rollButton = document.getElementById('roll-btn')
+    let firstDieResult = document.getElementById('firstDie')
+    let secondDieResult = document.getElementById('secondDie')
+
+    rollButton.addEventListener('click', function () {
+
+        if (gameTypeSelected === 'one-die') {
+            let oneDie = Math.floor(Math.random() * 6) + 1
+            firstDieResult.textContent = oneDie;
+            secondDieResult.textContent = ""; //Clear the second dice result
+        } else if (gameTypeSelected === 'two-dice') {
+            let firstDie = Math.floor(Math.random() * 6) + 1
+            let secondDie = Math.floor(Math.random() * 6) + 1
+            firstDieResult.textContent = firstDie;
+            secondDieResult.textContent = secondDie;
+        }
+
+
+    })
 }
