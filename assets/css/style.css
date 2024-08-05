@@ -73,7 +73,7 @@ main button {
     font-family: "Luckiest Guy", sans-serif;
     cursor: pointer;
     background-color: rgb(255, 165, 0);
-
+    margin-top: 5px;
 
 }
 
@@ -125,6 +125,16 @@ main {
 .game {
     border: 1px solid black;
     height: 200px;
+}
+
+.roll-btn {
+    width: 50%;
+    font-size: 100%;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    cursor: pointer;
+    border-radius: 5%;
+    margin-top: 150px;
 }
 
 .score-area {

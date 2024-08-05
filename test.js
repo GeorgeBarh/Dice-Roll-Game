@@ -26,9 +26,7 @@ function letsPlay() {
                     <button data-type="hard">Hard</button>
                 </div>
             </div>
-            <div class="game">
-                <button class="roll-btn" data-type="submit">Roll!</button>
-            </div>
+            <div class="game"></div>
             <div class="score-area">
                 <p>Your tries: <span></span></p>
                 <p>Your score: <span></span></p>
@@ -92,8 +90,7 @@ function oneDieDifficulty() {
 
             if (this.getAttribute('data-type') === 'easy') {
                 alert('You have 3 tries to reach the number 6!');
-            }
-            else if (this.getAttribute('data-type') === 'medium') {
+            } else if (this.getAttribute('data-type') === 'medium') {
                 alert('You have 3 tries to reach number 9!');
             } else if (this.getAttribute('data-type') === 'hard') {
                 alert('You have 3 tries to reach number 12!');
@@ -102,7 +99,21 @@ function oneDieDifficulty() {
     }
 }
 
+/*
+* Alerts the user regarding the difficulty of the 'Two Dice' game type
+*/
+
+function twoDiceDifficulty() {
+
+    let twoDiceDifficultyLevels = document.querySelectorAll('button[data-type= "easy"], button[data-type="medium"], button[data-type= "hard"]')
+
+}
 
 
+function oneDieGame() {
 
+}
 
+function twoDiceGame {
+
+}
