@@ -26,13 +26,13 @@ function letsPlay() {
                 </div>
             </div>
             <div class="game">
-                <span id= "firstDie" class="dice-result"></span>
-                <span id= "secondDie" class="dice-result"></span>
+                <span id= "firstDie" class="dice-result">1</span>
+                <span id= "secondDie" class="dice-result">1</span>
                 <button id="roll-btn" data-type="submit">Roll!</button>
             </div>
             <div class="score-area">
-                <p>Your tries: <span></span></p>
-                <p>Your score: <span></span></p>
+                <p>Your tries: <span id="tries">0</span></p>
+                <p>Your score: <span id="score">0</span></p>
             </div>
             <div class="versus-computer">
                 <p>Do you think you can beat the computer?</p>
@@ -116,17 +116,54 @@ function runGame() {
 
     rollButton.addEventListener('click', function () {
 
+        if (gameTypeSelected === '') {
+            alert("Please select game type and difficulty level.")
+            return;
+        }
+
         if (gameTypeSelected === 'one-die') {
             let oneDie = Math.floor(Math.random() * 6) + 1
             firstDieResult.textContent = oneDie;
             secondDieResult.textContent = ""; //Clear the second dice result
         } else if (gameTypeSelected === 'two-dice') {
-            let firstDie = Math.floor(Math.random() * 6) + 1
-            let secondDie = Math.floor(Math.random() * 6) + 1
+            let firstDie = Math.floor(Math.random() * 6) + 1;
+            let secondDie = Math.floor(Math.random() * 6) + 1;
             firstDieResult.textContent = firstDie;
             secondDieResult.textContent = secondDie;
         }
 
+        incrementTries();
+        incrementScore();
 
     })
+}
+
+function incrementTries() {
+    let tries = document.getElementById('tries');
+    let currentTries = parseInt(tries.innerText);
+    updatedTries = ++currentTries;
+    tries.innerText = updatedTries;
+
+    if (parseInt(tries.innerText) === 3) {
+        alert("You reached your 3 tries!")
+    }
+    return;
+}
+
+function incrementScore() {
+    let currentScore = parseInt(document.getElementById('score').innerText);
+    let firstDieScore = parseInt(document.getElementById('firstDie').innerText);
+    let secondDieScore = parseInt(document.getElementById('secondDie').innerText) || 0; // Default to 0: when it is an empty string or not a valid number, it will be treated as 0 in the calculation.
+
+
+    let updatedScore = currentScore + firstDieScore + secondDieScore;
+
+    document.getElementById('score').innerText = updatedScore;
+
+    // Optional: Log values for debugging
+    console.log('Current Score:', currentScore);
+    console.log('First Die Score:', firstDieScore);
+    console.log('Second Die Score:', secondDieScore);
+    console.log('Updated Score:', updatedScore);
+
 }
