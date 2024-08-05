@@ -40,9 +40,17 @@ function letsPlay() {
     <div class="game">
     </div>
 
+ <div class="score-area">
+            <p>Your tries: <span></span></p>
+            <p>Your score:<span></span></p>
+        </div>
 
+        <div class="versus-computer">
 
+            <p>Do you think you can beat the computer?</p>
+            <button class="versus-computer-btn">Play versus the computer</button>
 
+        </div>
         `
 
     })
