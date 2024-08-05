@@ -1,6 +1,5 @@
 // Declare constants for DOM elements
-
-let gameTypeSelected = false; // Flag to track if a game type has been selected
+let gameTypeSelected = '';  // This variable will track the selected game type
 
 // Wait for the DOM to finish loading before running the game
 document.addEventListener("DOMContentLoaded", function () {
@@ -40,7 +39,7 @@ function letsPlay() {
         `;
         // Call the function to attach event listeners after adding content
         chooseGame();
-        oneDieDifficulty();
+        setUpDifficulty();
     });
 }
 
@@ -62,47 +61,46 @@ function chooseGame() {
 
         gameTypeButton.addEventListener('click', function () {
             // Check which button was clicked based on its data-type attribute
-            if (this.getAttribute('data-type') === "one-die") {
-                alert('You chose to play with One Die! Please select difficulty level to start the game!');
-            } else if (this.getAttribute('data-type') === 'two-dice') {
-                alert('You chose to play with Two Dice! Please select difficulty to start the game!');
-            }
+            gameTypeSelected = this.getAttribute('data-type');
 
-            gameTypeSelected = true;
+            if (gameTypeSelected === 'one-die') {
+                alert('You chose to play with One Die! Please select difficulty level.');
+            } else if (gameTypeSelected === 'two-dice') {
+                alert('You chose to play with Two Dice! Please select difficulty level.');
+            }
         });
     }
 }
 
-/*
-* Alerts the user regarding the difficulty of the 'One Die' game type
-*/
+function setUpDifficulty() {
+    let difficultyButtons = document.querySelectorAll('button[data-type="easy"], button[data-type="medium"], button[data-type="hard"]');
 
-function oneDieDifficulty() {
-    let oneDieDifficultyLevels = document.querySelectorAll('button[data-type="easy"], button[data-type="medium"], button[data-type="hard"]');
+    for (let i = 0; i < difficultyButtons.length; i++) {
+        let difficultyButton = difficultyButtons[i];
 
-    for (let i = 0; i < oneDieDifficultyLevels.length; i++) {
-        let oneDieDifficultyLevel = oneDieDifficultyLevels[i];
-
-        oneDieDifficultyLevel.addEventListener('click', function () {
-
-            if (!gameTypeSelected) {
-                alert('Please select a game type first!')
+        difficultyButton.addEventListener('click', function () {
+            if (gameTypeSelected === '') {
+                alert('Please choose a game type first!');
                 return;
             }
 
-            if (this.getAttribute('data-type') === 'easy') {
-                alert('You have 3 tries to reach the number 6!');
-            }
-            else if (this.getAttribute('data-type') === 'medium') {
-                alert('You have 3 tries to reach number 9!');
-            } else if (this.getAttribute('data-type') === 'hard') {
-                alert('You have 3 tries to reach number 12!');
+            if (gameTypeSelected === 'one-die') {
+                if (this.getAttribute('data-type') === 'easy') {
+                    alert('You have 3 tries to reach the number 6! Good luck!');
+                } else if (this.getAttribute('data-type') === 'medium') {
+                    alert('You have 3 tries to reach the number 9! Good luck!');
+                } else if (this.getAttribute('data-type') === 'hard') {
+                    alert('You have 3 tries to reach the number 12! Good luck!');
+                }
+            } else if (gameTypeSelected === 'two-dice') {
+                if (this.getAttribute('data-type') === 'easy') {
+                    alert('You have 3 tries to reach the number 12! Good luck!');
+                } else if (this.getAttribute('data-type') === 'medium') {
+                    alert('You have 3 tries to reach the number 18! Good luck!');
+                } else if (this.getAttribute('data-type') === 'hard') {
+                    alert('You have 3 tries to reach the number 24! Good luck!');
+                }
             }
         });
     }
 }
-
-
-
-
-
