@@ -34,11 +34,11 @@ function letsPlay() {
             <button>Hard</button>
 
         </div>
-        
+
     </div>
 
-        <div class="game">
-        </div>
+    <div class="game">
+    </div>
 
 
 
