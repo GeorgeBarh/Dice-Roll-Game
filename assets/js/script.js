@@ -1,5 +1,9 @@
 // Declare constants for DOM elements
-let gameTypeSelected = '';  // This variable will track the selected game type
+
+// This variable will track the selected game type
+let gameTypeSelected = '';
+//This variable will trace the selected diffulty level
+let difficultyLevelSelected = '';
 
 // Wait for the DOM to finish loading before running the game
 document.addEventListener("DOMContentLoaded", function () {
@@ -63,7 +67,7 @@ function chooseGame() {
         let gameTypeButton = gameTypeButtons[i];
 
         gameTypeButton.addEventListener('click', function () {
-            // Check which button was clicked based on its data-type attribute
+            // Check which button was clicked based on its data-type attribute , tracks the selection of the user 
             gameTypeSelected = this.getAttribute('data-type');
 
             if (gameTypeSelected === 'one-die') {
@@ -86,6 +90,8 @@ function setUpDifficulty() {
                 alert('Please choose a game type first!');
                 return;
             }
+
+            difficultyLevelSelected = this.getAttribute('data-type') // Tracks the selection of the user 
 
             if (gameTypeSelected === 'one-die') {
                 if (this.getAttribute('data-type') === 'easy') {
@@ -134,6 +140,7 @@ function runGame() {
 
         incrementTries();
         incrementScore();
+        checkResult();
 
     })
 }
@@ -144,10 +151,10 @@ function incrementTries() {
     updatedTries = ++currentTries;
     tries.innerText = updatedTries;
 
-    if (parseInt(tries.innerText) === 3) {
-        alert("You reached your 3 tries!")
-    }
-    return;
+    // if (parseInt(tries.innerText) === 3) {
+    //     alert("You reached your 3 tries!")
+    // }
+    // return;
 }
 
 function incrementScore() {
@@ -160,10 +167,55 @@ function incrementScore() {
 
     document.getElementById('score').innerText = updatedScore;
 
-    // Optional: Log values for debugging
-    console.log('Current Score:', currentScore);
-    console.log('First Die Score:', firstDieScore);
-    console.log('Second Die Score:', secondDieScore);
-    console.log('Updated Score:', updatedScore);
+}
 
+function checkResult() {
+    // Convert these to numbers
+    let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
+    let scoreNumber = parseInt(document.getElementById('score').innerText, 10);
+
+    // Check if the number of tries is exactly 3
+    if (numberOfTries === 3) {
+        if (gameTypeSelected === 'one-die') {
+            if (difficultyLevelSelected === 'easy') {
+                if (scoreNumber >= 6) {
+                    alert(`Well done! The target was 6 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 6. Maybe next time you will be luckier!`);
+                }
+            } else if (difficultyLevelSelected === 'medium') {
+                if (scoreNumber >= 9) {
+                    alert(`Well done! The target was 9 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 9. Maybe next time you will be luckier!`);
+                }
+            } else if (difficultyLevelSelected === 'hard') {
+                if (scoreNumber >= 12) {
+                    alert(`Well done! The target was 12 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 12. Maybe next time you will be luckier!`);
+                }
+            }
+        } else if (gameTypeSelected === 'two-dice') {
+            if (difficultyLevelSelected === 'easy') {
+                if (scoreNumber >= 12) {
+                    alert(`Well done! The target was 12 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 12. Maybe next time you will be luckier!`);
+                }
+            } else if (difficultyLevelSelected === 'medium') {
+                if (scoreNumber >= 18) {
+                    alert(`Well done! The target was 18 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 18. Maybe next time you will be luckier!`);
+                }
+            } else if (difficultyLevelSelected === 'hard') {
+                if (scoreNumber >= 24) {
+                    alert(`Well done! The target was 24 and you rolled a ${scoreNumber}!`);
+                } else {
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 24. Maybe next time you will be luckier!`);
+                }
+            }
+        }
+    }
 }
