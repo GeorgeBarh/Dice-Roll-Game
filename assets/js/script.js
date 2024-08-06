@@ -20,16 +20,55 @@ const targets = {
 }
 
 // Wait for the DOM to finish loading before running the game
+
 document.addEventListener("DOMContentLoaded", function () {
-    letsPlay();
+
+    /*
+    * The game page should appears if the user clicks the start button
+    * or if the user presses Enter while the start button is focused.
+    */
+    let startButton = document.getElementById('start-button')
+    startButton.focus();
+
+    //Define event handlers
+
+    function startButtonClickHandler() {
+        startButton.addEventListener("click", function () {
+            letsPlay();
+        });
+    }
+
+    startButtonClickHandler();
+
+    function enterKeyPressHandler() {
+        startButton.addEventListener('keydown', function (event) {
+            if (key.event === 'Enter') {
+                letsPlay();
+            }
+        })
+    }
+
+    enterKeyPressHandler();
+
+    function headingClickedHandler() {
+        let headingClicked = document.getElementsByTagName('h1')[0];
+        headingClicked.addEventListener('click', function () {
+            resetToStart();
+
+        });
+    }
+
+    headingClickedHandler();
+
+
 });
 
+
 function letsPlay() {
-    let startButton = document.getElementById('start-button');
-    startButton.addEventListener("click", function () {
-        hideContent();
-        let gameArea = document.getElementsByClassName('game-area')[0];
-        gameArea.innerHTML = `
+    hideContent();
+    let gameArea = document.getElementsByClassName('game-area')[0];
+    gameArea.style.display = 'block'; // Make sure the game area is visible after the resetGame() 
+    gameArea.innerHTML = `
             <div class="game-questions">
                 <div class="game-selection">
                     <p>Choose a game:</p>
@@ -57,20 +96,29 @@ function letsPlay() {
                 <button class="versus-computer-btn">Play versus the computer</button>
             </div>
         `;
-        // Call the function to attach event listeners after adding content
-        chooseGame();
-        setUpDifficulty();
-        runGame();
-    });
+    // Call the function to attach event listeners after adding content
+    chooseGame();
+    setUpDifficulty();
+    runGame();
+};
+
+
+function resetToStart() {
+    let gameArea = document.getElementsByClassName('game-area')[0]
+    gameArea.style.display = 'none';
+    let startBtn = document.getElementById('start-button')
+    startBtn.style.display = 'block';
+    let gameIntro = document.getElementById('game-description');
+    gameIntro.style.display = "block";
+
 }
+
 
 function hideContent() {
     let startButton = document.getElementById('start-button');
     startButton.style.display = "none";
     let gameDescription = document.getElementById('game-description');
-    if (gameDescription) {
-        gameDescription.style.display = "none";
-    }
+    gameDescription.style.display = "none";
 }
 
 function chooseGame() {
@@ -205,8 +253,10 @@ function checkResult() {
 }
 
 function resetGame() {
+
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
+    // Clear the values of the dice before the game restart
     document.getElementById('firstDie').innerText = '';
     document.getElementById('secondDie').innerText = '';
     letsPlay();
