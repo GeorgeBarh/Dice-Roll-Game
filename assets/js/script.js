@@ -30,39 +30,33 @@ document.addEventListener("DOMContentLoaded", function () {
     let startButton = document.getElementById('start-button')
     startButton.focus();
 
-    //Define event handlers
+    startButtonListener();
+    enterKeyPressListener();
+    headingClickedListener();
 
-    function startButtonClickHandler() {
-        startButton.addEventListener("click", function () {
-            letsPlay();
-        });
+    //Define Event Listeners
+
+    function startButtonListener() {
+        startButton.addEventListener("click", letsPlay)
     }
 
-    startButtonClickHandler();
 
-    function enterKeyPressHandler() {
+    function enterKeyPressListener() {
         startButton.addEventListener('keydown', function (event) {
-            if (key.event === 'Enter') {
+            if (event.key === 'Enter') {
                 letsPlay();
             }
         })
     }
 
-    enterKeyPressHandler();
-
-    function headingClickedHandler() {
+    function headingClickedListener() {
         let headingClicked = document.getElementsByTagName('h1')[0];
-        headingClicked.addEventListener('click', function () {
-            resetToStart();
-
-        });
+        headingClicked.addEventListener('click', resetToStart)
     }
-
-    headingClickedHandler();
-
 
 });
 
+// Declare Handlers
 
 function letsPlay() {
     hideContent();
@@ -110,6 +104,10 @@ function resetToStart() {
     startBtn.style.display = 'block';
     let gameIntro = document.getElementById('game-description');
     gameIntro.style.display = "block";
+
+    let startButton = document.getElementById('start-button')
+    startButton.focus(); // it sets the startButton on focus after the rest so as the enteKeyPressListener to work again.
+
 
 }
 
