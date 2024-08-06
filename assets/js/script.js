@@ -2,10 +2,12 @@
 
 // This variable will track the selected game type
 let gameTypeSelected = '';
-//This variable will trace the selected diffulty level
+//This variable will trace the selected difficulty level
 let difficultyLevelSelected = '';
 
-// Define target scores for each game type and difficulty level so as to be easier to handle them inside the functions 
+/*
+*Define target scores for each game type and difficulty level so as to be easier to handle them inside the functions 
+*/
 const targets = {
     'one-die': {
         'easy': 7,
@@ -19,12 +21,33 @@ const targets = {
     }
 }
 
+/*
+* Declare global variables for dice values so as to be updated 
+* in the incrementScore() and runGame() functions
+*/
+let firstDieValue = 0;
+let secondDieValue = 0;
+
+/*
+*This object includes the images of the die that will display to
+*the screen according to the random number (between 1-6 ) that *the user will roll once they click the Roll button 
+*/
+
+const diceImages = {
+    1: 'assets/images/die-1.png',
+    2: 'assets/images/die-2.png',
+    3: 'assets/images/die-3.png',
+    4: 'assets/images/die-4.png',
+    5: 'assets/images/die-5.png',
+    6: 'assets/images/die-6.png',
+}
+
 // Wait for the DOM to finish loading before running the game
 
 document.addEventListener("DOMContentLoaded", function () {
 
     /*
-    * The game page should appears if the user clicks the start button
+    * The game page should appear if the user clicks the start button
     * or if the user presses Enter while the start button is focused.
     */
     let startButton = document.getElementById('start-button')
@@ -34,24 +57,23 @@ document.addEventListener("DOMContentLoaded", function () {
     enterKeyPressListener();
     headingClickedListener();
 
-    //Define Event Listeners
+    // Define Event Listeners
 
     function startButtonListener() {
-        startButton.addEventListener("click", letsPlay)
+        startButton.addEventListener("click", letsPlay);
     }
-
 
     function enterKeyPressListener() {
         startButton.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 letsPlay();
             }
-        })
+        });
     }
 
     function headingClickedListener() {
         let headingClicked = document.getElementsByTagName('h1')[0];
-        headingClicked.addEventListener('click', resetToStart)
+        headingClicked.addEventListener('click', resetToStart);
     }
 
 });
@@ -77,9 +99,11 @@ function letsPlay() {
                 </div>
             </div>
             <div class="game">
-                <span id= "firstDie" class="dice-result">1</span>
-                <span id= "secondDie" class="dice-result">1</span>
-                <button id="roll-btn" data-type="submit">Roll!</button>
+                <img id="firstDie" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
+                <img id="secondDie" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
+            </div>
+            <div>
+            <button id="roll-btn" data-type="submit">Roll!</button>
             </div>
             <div class="score-area">
                 <p>Your tries: <span id="tries">0</span></p>
@@ -94,23 +118,19 @@ function letsPlay() {
     chooseGame();
     setUpDifficulty();
     runGame();
-};
-
+}
 
 function resetToStart() {
-    let gameArea = document.getElementsByClassName('game-area')[0]
+    let gameArea = document.getElementsByClassName('game-area')[0];
     gameArea.style.display = 'none';
-    let startBtn = document.getElementById('start-button')
+    let startBtn = document.getElementById('start-button');
     startBtn.style.display = 'block';
     let gameIntro = document.getElementById('game-description');
     gameIntro.style.display = "block";
 
-    let startButton = document.getElementById('start-button')
-    startButton.focus(); // it sets the startButton on focus after the rest so as the enteKeyPressListener to work again.
-
-
+    let startButton = document.getElementById('start-button');
+    startButton.focus(); // it sets the startButton on focus after the reset so as the enterKeyPressListener to work again.
 }
-
 
 function hideContent() {
     let startButton = document.getElementById('start-button');
@@ -127,7 +147,7 @@ function chooseGame() {
         let gameTypeButton = gameTypeButtons[i];
 
         gameTypeButton.addEventListener('click', function () {
-            // Check which button was clicked based on its data-type attribute , tracks the selection of the user 
+            // Check which button was clicked based on its data-type attribute, tracks the selection of the user 
             gameTypeSelected = this.getAttribute('data-type');
 
             if (gameTypeSelected === 'one-die') {
@@ -167,33 +187,38 @@ function setUpDifficulty() {
 }
 
 function runGame() {
-    let rollButton = document.getElementById('roll-btn')
-    let firstDieResult = document.getElementById('firstDie')
-    let secondDieResult = document.getElementById('secondDie')
+    let rollButton = document.getElementById('roll-btn');
+    let firstDieImage = document.getElementById('firstDie');
+    let secondDieImage = document.getElementById('secondDie');
 
     rollButton.addEventListener('click', function () {
 
         if (gameTypeSelected === '') {
-            alert("Please select game type and difficulty level.")
+            alert("Please select game type and difficulty level.");
             return;
         }
 
         if (gameTypeSelected === 'one-die') {
-            let oneDie = Math.floor(Math.random() * 6) + 1
-            firstDieResult.textContent = oneDie;
-            secondDieResult.textContent = ""; //Clear the second dice result
+            firstDieValue = Math.floor(Math.random() * 6) + 1;
+            firstDieImage.src = diceImages[firstDieValue];
+            // Hide the second die
+            secondDieValue = 0;
+            secondDieImage.src = '';
+            secondDieImage.style.display = 'none';
+
         } else if (gameTypeSelected === 'two-dice') {
-            let firstDie = Math.floor(Math.random() * 6) + 1;
-            let secondDie = Math.floor(Math.random() * 6) + 1;
-            firstDieResult.textContent = firstDie;
-            secondDieResult.textContent = secondDie;
+            firstDieValue = Math.floor(Math.random() * 6) + 1;
+            secondDieValue = Math.floor(Math.random() * 6) + 1;
+            firstDieImage.src = diceImages[firstDieValue];
+            secondDieImage.src = diceImages[secondDieValue];
+
+            secondDieImage.style.display = 'block';
         }
 
         incrementTries();
         incrementScore();
         checkResult();
-
-    })
+    });
 }
 
 function incrementTries() {
@@ -201,23 +226,18 @@ function incrementTries() {
     let currentTries = parseInt(tries.innerText);
     updatedTries = ++currentTries;
     tries.innerText = updatedTries;
-
 }
 
 function incrementScore() {
-    let currentScore = parseInt(document.getElementById('score').innerText);
-    let firstDieScore = parseInt(document.getElementById('firstDie').innerText);
-    let secondDieScore = parseInt(document.getElementById('secondDie').innerText) || 0; // Default to 0: when it is an empty string or not a valid number, it will be treated as 0 in the calculation.
+    let currentScore = parseInt(document.getElementById('score').innerText, 10) || 0;
 
-
-    let updatedScore = currentScore + firstDieScore + secondDieScore;
+    let updatedScore = currentScore + firstDieValue + secondDieValue;
 
     document.getElementById('score').innerText = updatedScore;
-
 }
 
 function checkResult() {
-    // Convert these to numbers
+    // Convert these elements to numbers
     let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
     let scoreNumber = parseInt(document.getElementById('score').innerText, 10);
 
@@ -251,11 +271,10 @@ function checkResult() {
 }
 
 function resetGame() {
-
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
     // Clear the values of the dice before the game restart
-    document.getElementById('firstDie').innerText = '';
-    document.getElementById('secondDie').innerText = '';
+    // document.getElementById('firstDie').src = '';
+    // document.getElementById('secondDie').src = '';
     letsPlay();
 }
