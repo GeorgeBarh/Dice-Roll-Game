@@ -207,8 +207,7 @@ function checkResult() {
 function resetGame() {
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
-    gameTypeSelected = '';
-    difficultyLevelSelected = '';
-
+    document.getElementById('firstDie').innerText = '';
+    document.getElementById('secondDie').innerText = '';
     letsPlay();
 }
