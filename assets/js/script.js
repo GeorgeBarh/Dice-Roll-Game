@@ -5,6 +5,20 @@ let gameTypeSelected = '';
 //This variable will trace the selected diffulty level
 let difficultyLevelSelected = '';
 
+// Define target scores for each game type and difficulty level so as to be easier to handle them inside the functions 
+const targets = {
+    'one-die': {
+        'easy': 7,
+        'medium': 11,
+        'hard': 14
+    },
+    'two-dice': {
+        'easy': 12,
+        'medium': 20,
+        'hard': 27
+    }
+}
+
 // Wait for the DOM to finish loading before running the game
 document.addEventListener("DOMContentLoaded", function () {
     letsPlay();
@@ -91,29 +105,20 @@ function setUpDifficulty() {
                 return;
             }
 
-            difficultyLevelSelected = this.getAttribute('data-type') // Tracks the selection of the user 
+            difficultyLevelSelected = this.getAttribute('data-type'); // Track the selection of the user 
+
+            let targetScore;
 
             if (gameTypeSelected === 'one-die') {
-                if (this.getAttribute('data-type') === 'easy') {
-                    alert('You have 3 tries to reach the number 6! Good luck!');
-                } else if (this.getAttribute('data-type') === 'medium') {
-                    alert('You have 3 tries to reach the number 9! Good luck!');
-                } else if (this.getAttribute('data-type') === 'hard') {
-                    alert('You have 3 tries to reach the number 12! Good luck!');
-                }
+                targetScore = targets['one-die'][difficultyLevelSelected];
             } else if (gameTypeSelected === 'two-dice') {
-                if (this.getAttribute('data-type') === 'easy') {
-                    alert('You have 3 tries to reach the number 12! Good luck!');
-                } else if (this.getAttribute('data-type') === 'medium') {
-                    alert('You have 3 tries to reach the number 18! Good luck!');
-                } else if (this.getAttribute('data-type') === 'hard') {
-                    alert('You have 3 tries to reach the number 24! Good luck!');
-                }
+                targetScore = targets['two-dice'][difficultyLevelSelected];
             }
+
+            alert(`You have 3 tries to reach the number ${targetScore}! Good luck!`);
         });
     }
 }
-
 
 function runGame() {
     let rollButton = document.getElementById('roll-btn')
@@ -151,10 +156,6 @@ function incrementTries() {
     updatedTries = ++currentTries;
     tries.innerText = updatedTries;
 
-    // if (parseInt(tries.innerText) === 3) {
-    //     alert("You reached your 3 tries!")
-    // }
-    // return;
 }
 
 function incrementScore() {
@@ -176,46 +177,38 @@ function checkResult() {
 
     // Check if the number of tries is exactly 3
     if (numberOfTries === 3) {
-        if (gameTypeSelected === 'one-die') {
-            if (difficultyLevelSelected === 'easy') {
-                if (scoreNumber >= 6) {
-                    alert(`Well done! The target was 6 and you rolled a ${scoreNumber}!`);
+        setTimeout(function () {
+            let targetScore;
+
+            if (gameTypeSelected === 'one-die') {
+                targetScore = targets['one-die'][difficultyLevelSelected];
+
+                if (scoreNumber >= targetScore) {
+                    alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
                 } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 6. Maybe next time you will be luckier!`);
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
                 }
-            } else if (difficultyLevelSelected === 'medium') {
-                if (scoreNumber >= 9) {
-                    alert(`Well done! The target was 9 and you rolled a ${scoreNumber}!`);
+
+            } else if (gameTypeSelected === 'two-dice') {
+                targetScore = targets['two-dice'][difficultyLevelSelected];
+
+                if (scoreNumber >= targetScore) {
+                    alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
                 } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 9. Maybe next time you will be luckier!`);
-                }
-            } else if (difficultyLevelSelected === 'hard') {
-                if (scoreNumber >= 12) {
-                    alert(`Well done! The target was 12 and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 12. Maybe next time you will be luckier!`);
-                }
-            }
-        } else if (gameTypeSelected === 'two-dice') {
-            if (difficultyLevelSelected === 'easy') {
-                if (scoreNumber >= 12) {
-                    alert(`Well done! The target was 12 and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 12. Maybe next time you will be luckier!`);
-                }
-            } else if (difficultyLevelSelected === 'medium') {
-                if (scoreNumber >= 18) {
-                    alert(`Well done! The target was 18 and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 18. Maybe next time you will be luckier!`);
-                }
-            } else if (difficultyLevelSelected === 'hard') {
-                if (scoreNumber >= 24) {
-                    alert(`Well done! The target was 24 and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was 24. Maybe next time you will be luckier!`);
+                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
                 }
             }
-        }
+
+            resetGame();
+        }, 100); // 100 milliseconds delay to ensure the alert message will be displayed only after the score is updated.
     }
+}
+
+function resetGame() {
+    document.getElementById('tries').innerText = '0';
+    document.getElementById('score').innerText = '0';
+    gameTypeSelected = '';
+    difficultyLevelSelected = '';
+
+    letsPlay();
 }
