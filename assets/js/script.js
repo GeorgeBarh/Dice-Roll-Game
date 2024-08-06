@@ -192,32 +192,40 @@ function runGame() {
     let secondDieImage = document.getElementById('secondDie');
 
     rollButton.addEventListener('click', function () {
-
         if (gameTypeSelected === '') {
             alert("Please select game type and difficulty level.");
             return;
         }
 
-        if (gameTypeSelected === 'one-die') {
-            firstDieValue = Math.floor(Math.random() * 6) + 1;
-            firstDieImage.src = diceImages[firstDieValue];
-            // Hide the second die
-            secondDieValue = 0;
-            secondDieImage.src = '';
-            secondDieImage.style.display = 'none';
+        // Hide the dice initially 
+        firstDieImage.style.display = 'none';
+        secondDieImage.style.display = 'none';
 
-        } else if (gameTypeSelected === 'two-dice') {
-            firstDieValue = Math.floor(Math.random() * 6) + 1;
-            secondDieValue = Math.floor(Math.random() * 6) + 1;
-            firstDieImage.src = diceImages[firstDieValue];
-            secondDieImage.src = diceImages[secondDieValue];
+        // setTimeout to introduce a delay before updating dice images 
 
-            secondDieImage.style.display = 'block';
-        }
+        setTimeout(() => {
+            if (gameTypeSelected === 'one-die') {
+                firstDieValue = Math.floor(Math.random() * 6) + 1;
+                firstDieImage.src = diceImages[firstDieValue];
+                secondDieImage.src = ''; // Clear the second die
+                secondDieImage.style.display = 'none';
+            } else if (gameTypeSelected === 'two-dice') {
+                firstDieValue = Math.floor(Math.random() * 6) + 1;
+                secondDieValue = Math.floor(Math.random() * 6) + 1;
+                firstDieImage.src = diceImages[firstDieValue];
+                secondDieImage.src = diceImages[secondDieValue];
+                secondDieImage.style.display = 'block';
+            }
 
-        incrementTries();
-        incrementScore();
-        checkResult();
+            // Display the dice images after the delay
+
+            firstDieImage.style.display = 'block';
+            secondDieImage.style.display = gameTypeSelected === 'two-dice' ? 'block' : 'none';
+
+            incrementTries();
+            incrementScore();
+            checkResult();
+        }, 500); // Adjust the delay duration as needed (500ms in this case)
     });
 }
 
