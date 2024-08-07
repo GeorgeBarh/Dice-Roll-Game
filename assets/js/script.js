@@ -187,8 +187,8 @@ function addGameHtml() {
             <p>Your score: <span id="score">0</span></p>
         </div>
         <div class="game">
-            <img id="first-die" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
-            <img id="second-die" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
+            <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
+            <img id="second-die" src="assets/images/die-1.png" class="dice-images" alt="second-die-image"></img>
         </div>
         <div>
         <button id="roll-btn" data-type="submit">Roll!</button>
@@ -411,19 +411,19 @@ function versusComputerHtml() {
     <div id="player-area">
         <p>Your score: <span id="score">0</span></p>
 
-        <img id="player-first-die" src="assets/images/die-1.png" class="dice-result"
+        <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="player-firstdie-number-image"></img>
-        <img id="player-second-die" src="assets/images/die-1.png" class="dice-result" alt="player-second-die-image"></img>
+        <img id="player-second-die" src="assets/images/die-1.png" class="dice-images" alt="player-second-die-image"></img>
     </div>
     <div id="computer-area">
         <p>Computer score: <span id="computer-score">0</span></p>
-        <img id="computer-first-die" src="assets/images/die-1.png" class="dice-result"
+        <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="computer-firstdie-number-image"></img>
-        <img id="computer-second-die" src="assets/images/die-1.png" class="dice-result"
+        <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images"
             alt="computer-second-die-image"></img>
     </div>
 </div>
-<div class="tries-area>
+<div class="tries-area">
     <p>Your tries: <span id="tries">0</span></p>
 </div>
 <div>
