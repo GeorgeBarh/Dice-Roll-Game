@@ -188,8 +188,9 @@ function addGameHtml() {
         </div>
 
         <div class="game">
-            <div>
+            <div class="score-area">
                 <p>Your score: <span id="score" class="counter-style">0</span></p>
+                <p>Your target: <span id ="goal"></span></p>
             </div>
             <div class="images-box">   
                 <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>

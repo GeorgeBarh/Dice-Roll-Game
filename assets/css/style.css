@@ -38,6 +38,10 @@ h1:hover {
     border: 2px solid black;
 }
 
+h1 span {
+    margin-right: 15px;
+}
+
 main button {
     background-color: rgb(255, 165, 0);
     font-family: "Quicksand", sans-serif;
@@ -163,7 +167,6 @@ main {
     margin: 1.5rem 0.5rem;
     background-color: rgba(181, 180, 179, 0.8);
     box-shadow: 0 0 5px 5px rgba(189, 4, 4, 0.3);
-
 }
 
 .images-box {
@@ -260,6 +263,7 @@ footer {
 
     h1 {
         height: 8rem;
+        font-size: 400%;
     }
 
     h1 span {
@@ -271,10 +275,16 @@ footer {
         padding: 2rem;
     }
 
+    #start-button {
+        border-radius: 25px;
+        font-size: 250%;
+    }
+
+
     #roll-btn {
-        font-size: 130%;
+        font-size: 160%;
         letter-spacing: 1px;
-        width: 20rem;
+        width: 15rem;
     }
 
     #choose-opponent-btn {
@@ -284,6 +294,10 @@ footer {
         padding: 0.5rem;
         margin-bottom: 15px;
         width: 25rem;
+    }
+
+    #game {
+        width: 70%;
     }
 
     .font-icons>* {
