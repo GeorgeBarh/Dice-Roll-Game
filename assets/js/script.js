@@ -122,9 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function letsPlay() {
 
-
-    hideContent();
     addGameHtml();
+    hideContent();
     chooseGame();
     setUpDifficulty();
     runGame();
@@ -190,7 +189,7 @@ function addGameHtml() {
         <div class="game">
             <div class="score-area">
                 <p>Your score: <span id="score" class="counter-style">0</span></p>
-                <p>Your target: <span id ="goal"></span></p>
+                <p>Your target: <span id ="goal" class="counter-style">${targetScore}</span></p>
             </div>
             <div class="images-box">   
                 <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
@@ -275,8 +274,17 @@ function setUpDifficulty() {
                 targetScore = targets['two-dice'][difficultyLevelSelected];
             }
 
+            updateTargetScoreHtml();
+
             alert(`You have 3 tries to reach the number ${targetScore}! Good luck!`);
         });
+    }
+}
+
+function updateTargetScoreHtml() {
+    let scoreGoal = document.getElementById('goal');
+    if (scoreGoal) {
+        scoreGoal.innerText = targetScore;
     }
 }
 
