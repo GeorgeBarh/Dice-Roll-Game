@@ -6,6 +6,8 @@ let gameTypeSelected = '';
 //This variable will trace the selected difficulty level
 let difficultyLevelSelected = '';
 
+//This variable will trace the target score based on the difficulty level and the game type
+let targetScore = 0;
 
 /*
 * Declare global variables for dice values so as to be updated 
@@ -119,6 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
  * and handle the game logic.
  */
 function letsPlay() {
+
+
     hideContent();
     addGameHtml();
     chooseGame();
@@ -185,14 +189,14 @@ function addGameHtml() {
 
         <div class="game">
             <div>
-                <p>Your score: <span id="score">0</span></p>
+                <p>Your score: <span id="score" class="counter-style">0</span></p>
             </div>
             <div class="images-box">   
                 <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
                 <img id="second-die" src="assets/images/die-1.png" class="dice-images" alt="second-die-image"></img>
             </div>
             <div>
-                <p>Your tries: <span id="tries">0</span></p>
+                <p>Your tries: <span id="tries" class="counter-style">0</span></p>
             </div>
 
         </div>
@@ -264,8 +268,6 @@ function setUpDifficulty() {
 
             difficultyLevelSelected = this.getAttribute('data-type'); // Track the selection of the user 
 
-            let targetScore;
-
             if (gameTypeSelected === 'one-die') {
                 targetScore = targets['one-die'][difficultyLevelSelected];
             } else if (gameTypeSelected === 'two-dice') {
@@ -284,10 +286,18 @@ function runGame() {
 
 
     rollButton.addEventListener('click', function () {
-        if (gameTypeSelected === '') {
-            alert("Please select game type and difficulty level.");
-            return;
+        // Check if both game type and difficulty level are selected
+        if (gameTypeSelected === '' || difficultyLevelSelected === '') {
+            if (gameTypeSelected === '' && difficultyLevelSelected === '') {
+                alert('Please select game type first and then the difficulty level.Good luck!');
+            } else if (gameTypeSelected === '') {
+                alert("Please select a game type.");
+            } else if (difficultyLevelSelected === '') {
+                alert("Please select a difficulty level.");
+            }
+            return; // Exit the function if any selection is missing
         }
+
         else if (gameTypeSelected === 'one-die') {
             firstDieValue = Math.floor(Math.random() * 6) + 1;
             firstDieImage.src = diceImages[firstDieValue];
@@ -344,7 +354,6 @@ function checkResult() {
 
     // Check if the number of tries is exactly 3
     if (numberOfTries == 3) {
-        let targetScore;
 
         if (gameTypeSelected === 'one-die') {
             targetScore = targets['one-die'][difficultyLevelSelected];
@@ -368,8 +377,23 @@ function checkResult() {
         resetGame();
     }
 
-
 }
+
+// Reset dice images based on the game type
+let firstDieImage = document.getElementById('first-die');
+let secondDieImage = document.getElementById('second-die');
+
+firstDieImage.src = diceImages[1]; // Reset to default image
+if (gameTypeSelected === 'one-die') {
+    secondDieImage.style.display = 'none'; // Hide the second die
+} else if (gameTypeSelected === 'two-dice') {
+    secondDieImage.src = diceImages[1]; // Reset to default image
+    secondDieImage.style.display = 'block'; // Display the second die
+}
+
+//     // Call letsPlay to ensure game area and state are correctly initialized
+//     letsPlay();
+// }
 
 function resetGame() {
     // Clear the values of the dice before the game restart
@@ -409,13 +433,13 @@ function versusComputerHtml() {
 <div class="game">
     <div class = player-vs-computer>
         <div id="player-area">
-            <p>Player: <span id="player-score">0</span></p>
+            <p>Player: <span id="player-score" class="counter-style">0</span></p>
             <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="player-firstdie-number-image"></img>
             <img id="player-second-die" src="assets/images/die-1.png" class="dice-images" alt="player-second-die-image"></img>
         </div>
         <div id="computer-area">
-            <p> Computer: <span id="computer-score">0</span></p>
+            <p> Computer: <span id="computer-score" class="counter-style">0</span></p>
             <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="computer-firstdie-number-image"></img>
             <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images"
@@ -423,14 +447,14 @@ function versusComputerHtml() {
         </div>
     </div>
     <div class="tries-area">
-        <p>Your tries: <span id="tries">0</span></p>
+        <p>Your tries: <span id="tries" class="counter-style">0</span></p>
     </div>
 </div>
 
 <div>
     <button id="roll-btn" data-type="submit">Roll!</button>
 </div>
-<div id="choose-opponent" class="opponent-computer">
+<div id="choose-opponent" >
     <button id="choose-opponent-btn">Play single game</button>
 </div>
 `;
@@ -481,7 +505,7 @@ function runComputerGame() {
 
     rollBtn.addEventListener('click', function () {
         if (gameTypeSelected === '') {
-            alert("Please select game type to start the game!Good luck!");
+            alert("Please select game type to start the game! Good luck!");
             return;
         }
         else if (gameTypeSelected === 'one-die') {
@@ -554,6 +578,9 @@ function checkResultVsComputer() {
     let computerScore = parseInt(document.getElementById('computer-score').innerText, 10);
     let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
 
+    // Ensure the winner element exists
+    let winner = document.getElementById('winner');
+
     // Check if the number of tries is exactly 3
     if (numberOfTries === 3) {
         // Determine the winner based on the highest score
@@ -568,9 +595,7 @@ function checkResultVsComputer() {
         alert(resultMessage);
 
         resetVersusComputerGame();
-
     }
-
 }
 
 
@@ -591,3 +616,5 @@ function playSingeGameListener() {
     let playSingeGameBtn = document.getElementById('choose-opponent-btn')
     playSingeGameBtn.addEventListener('click', letsPlay)
 }
+
+
