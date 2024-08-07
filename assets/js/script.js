@@ -152,6 +152,11 @@ function chooseGame() {
 
             if (gameTypeSelected === 'one-die') {
                 alert('You chose to play with One Die! Please select difficulty level.');
+
+                // Hide the second die if the user plays one die game.
+                let secondDieImg = document.getElementById('secondDie');
+                secondDieImg.style.display = "none";
+
             } else if (gameTypeSelected === 'two-dice') {
                 alert('You chose to play with Two Dice! Please select difficulty level.');
             }
@@ -201,31 +206,30 @@ function runGame() {
         firstDieImage.style.display = 'none';
         secondDieImage.style.display = 'none';
 
-        // setTimeout to introduce a delay before updating dice images 
 
-        setTimeout(() => {
-            if (gameTypeSelected === 'one-die') {
-                firstDieValue = Math.floor(Math.random() * 6) + 1;
-                firstDieImage.src = diceImages[firstDieValue];
-                secondDieImage.src = ''; // Clear the second die
-                secondDieImage.style.display = 'none';
-            } else if (gameTypeSelected === 'two-dice') {
-                firstDieValue = Math.floor(Math.random() * 6) + 1;
-                secondDieValue = Math.floor(Math.random() * 6) + 1;
-                firstDieImage.src = diceImages[firstDieValue];
-                secondDieImage.src = diceImages[secondDieValue];
-                secondDieImage.style.display = 'block';
-            }
+        if (gameTypeSelected === 'one-die') {
+            firstDieValue = Math.floor(Math.random() * 6) + 1;
+            firstDieImage.src = diceImages[firstDieValue];
+            secondDieImage.src = ''; // Clear the second die
+            secondDieImage.style.display = 'none';
+            console.log(secondDieValue)
+        } else if (gameTypeSelected === 'two-dice') {
+            firstDieValue = Math.floor(Math.random() * 6) + 1;
+            secondDieValue = Math.floor(Math.random() * 6) + 1;
+            firstDieImage.src = diceImages[firstDieValue];
+            secondDieImage.src = diceImages[secondDieValue];
+            secondDieImage.style.display = 'block';
+        }
 
-            // Display the dice images after the delay
+        // Display the dice images after the delay
 
-            firstDieImage.style.display = 'block';
-            secondDieImage.style.display = gameTypeSelected === 'two-dice' ? 'block' : 'none';
+        firstDieImage.style.display = 'block';
+        secondDieImage.style.display = gameTypeSelected === 'two-dice' ? 'block' : 'none';
 
-            incrementTries();
-            incrementScore();
-            checkResult();
-        }, 500); // Adjust the delay duration as needed (500ms in this case)
+        incrementTries();
+        incrementScore();
+        checkResult();
+
     });
 }
 
@@ -237,17 +241,22 @@ function incrementTries() {
 }
 
 function incrementScore() {
-    let currentScore = parseInt(document.getElementById('score').innerText, 10) || 0;
 
-    let updatedScore = currentScore + firstDieValue + secondDieValue;
+    // setTimeout to introduce a delay before updating the score
 
-    document.getElementById('score').innerText = updatedScore;
+    setTimeout(function () {
+        let currentScore = parseInt(document.getElementById('score').innerText) || 0;
+
+        let updatedScore = currentScore + firstDieValue + secondDieValue;
+
+        document.getElementById('score').innerText = updatedScore;
+    }, 500); // Adjust the delay duration as needed (500ms in this case)
 }
 
 function checkResult() {
     // Convert these elements to numbers
-    let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
-    let scoreNumber = parseInt(document.getElementById('score').innerText, 10);
+    let numberOfTries = parseInt(document.getElementById('tries').innerText);
+    let scoreNumber = parseInt(document.getElementById('score').innerText);
 
     // Check if the number of tries is exactly 3
     if (numberOfTries === 3) {
@@ -274,8 +283,11 @@ function checkResult() {
             }
 
             resetGame();
-        }, 100); // 100 milliseconds delay to ensure the alert message will be displayed only after the score is updated.
+
+        }, 600); // 600 milliseconds delay to ensure the alert message will be displayed only after the score is updated.
     }
+
+
 }
 
 function resetGame() {
