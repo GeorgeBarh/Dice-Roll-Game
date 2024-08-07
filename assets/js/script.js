@@ -232,7 +232,7 @@ function runGame() {
         //checkResult is called after the score and tries updates are visible
         setTimeout(function () {
             checkResult(); // 
-        }, 200);
+        }, 300);
     });
 }
 
@@ -242,7 +242,7 @@ function incrementTries() {
         let currentTries = parseInt(tries.innerText);
         updatedTries = ++currentTries;
         tries.innerText = updatedTries;
-    }, 100) // Adjust the same delay with incrementScore() in order the score and tries to be displayed at the same time.
+    }, 250) // Adjust the same delay with incrementScore() in order the score and tries to be displayed at the same time.
 }
 
 function incrementScore() {
@@ -255,7 +255,7 @@ function incrementScore() {
         let updatedScore = currentScore + firstDieValue + secondDieValue;
 
         document.getElementById('score').innerText = updatedScore;
-    }, 100); // Adjust the delay duration so as to show the score after the dice images are fully loaded.
+    }, 250); // Adjust the delay duration so as to show the score after the dice images are fully loaded.
 }
 
 function checkResult() {
