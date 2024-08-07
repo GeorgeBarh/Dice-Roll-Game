@@ -171,7 +171,7 @@ function addGameHtml() {
     gameArea.innerHTML = `
         <div class="game-questions">
             <div class="game-selection">
-                <p class="two">Choose a game:</p>
+                <p class="two">Choose a game type:</p>
                 <button data-type="one-die">One Die</button>
                 <button data-type="two-dice">Two Dice</button>
             </div>
@@ -371,8 +371,6 @@ function checkResult() {
 
 }
 
-
-
 function resetGame() {
     // Clear the values of the dice before the game restart
     document.getElementById('tries').innerText = '0';
@@ -393,6 +391,7 @@ function playVsComputer() {
     versusComputerHtml();
     chooseGameVsComputer();
     runComputerGame();
+    playSingeGameListener();
 }
 
 
@@ -402,7 +401,7 @@ function versusComputerHtml() {
     versusPc.innerHTML = `
 <div class="game-questions">
     <div class="game-selection">
-        <p>Choose a game:</p>
+        <p>Choose a game type:</p>
         <button data-type="one-die">One Die</button>
         <button data-type="two-dice">Two Dice</button>
     </div>
@@ -449,7 +448,7 @@ function chooseGameVsComputer() {
             gameTypeSelected = this.getAttribute('data-type');
 
             if (gameTypeSelected === 'one-die') {
-                alert('You chose to compete the computer with One Die! Whoever brings the higher number wins!');
+                alert('You chose to compete the computer with One Die! Whoever roll the higher number wins!');
 
                 // Hide the players second die if the user plays one die game.
                 let playerSecondDieImg = document.getElementById('player-second-die');
@@ -459,7 +458,7 @@ function chooseGameVsComputer() {
                 computerSecondDieImg.style.display = 'none'
 
             } else if (gameTypeSelected === 'two-dice') {
-                alert('You chose to compete the computer with Two Dice! Whoever brings the higher number wins!');
+                alert('You chose to compete the computer with Two Dice! Whoever roll the higher number wins!');
 
                 //Display the players second die image if the user click two dice  game
                 let playerSecondDieImg = document.getElementById('player-second-die');
@@ -557,32 +556,23 @@ function checkResultVsComputer() {
 
     // Check if the number of tries is exactly 3
     if (numberOfTries === 3) {
-        let scoreTarget;
-
-        if (gameTypeSelected === 'one-die') {
-            scoreTarget = targets['one-die'][difficultyLevelSelected];
-        } else if (gameTypeSelected === 'two-dice') {
-            scoreTarget = targets['two-dice'][difficultyLevelSelected];
-        }
-
-        // Determine the winner based on the scores and target score
+        // Determine the winner based on the highest score
         let resultMessage;
-
-        if (playerScore >= scoreTarget && computerScore >= scoreTarget) {
-            if (playerScore > computerScore) {
-                resultMessage = `Congratulations! You won! Your score was ${playerScore} and the computer's score was ${computerScore}.`;
-            } else if (playerScore < computerScore) {
-                resultMessage = `You lost. Your score was ${playerScore} and the computer's score was ${computerScore}.`;
-            } else {
-                resultMessage = `It's a tie! Both you and the computer scored ${playerScore}.`;
-            }
+        if (playerScore > computerScore) {
+            resultMessage = `Congratulations! You won! Your score was ${playerScore} and the computer's score was ${computerScore}.`;
+        } else if (playerScore < computerScore) {
+            resultMessage = `That's too bad...You lost. Your score was ${playerScore} and the computer's score was ${computerScore}.`;
+        } else {
+            resultMessage = `It's a tie! Both you and the computer scored ${playerScore}.`;
         }
-
         alert(resultMessage);
 
         resetVersusComputerGame();
+
     }
+
 }
+
 
 function resetVersusComputerGame() {
     // Clear the values of the dice before the game restart
@@ -595,4 +585,9 @@ function resetVersusComputerGame() {
     computerFirstDieValue = 0;
     computerSecondDieValue = 0;
     playVsComputer();
+}
+
+function playSingeGameListener() {
+    let playSingeGameBtn = document.getElementById('choose-opponent-btn')
+    playSingeGameBtn.addEventListener('click', letsPlay)
 }
