@@ -139,17 +139,19 @@ main {
     font-size: 110%;
 }
 
-.game-selection p {
-    margin-bottom: 10px;
+.game-selection button {
+    margin-top: 0.5rem;
 }
+
 
 .game {
     border: 1px solid black;
-    height: 15rem;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 1rem;
 }
 
 .dice-result {
@@ -176,23 +178,28 @@ main {
 }
 
 #tries,
-#score {
+#score,
+#computer-score {
     color: rgb(254, 253, 253);
     font-size: 130%;
 }
 
-#choose-opponent>* {
-    padding: 10px;
+#choose-opponent {
+    margin: 10px 0;
+}
+
+#choose-opponent p {
+    padding: 5px;
 }
 
 #choose-opponent-btn {
-    margin-bottom: 70px;
     font-size: 100%;
     border-radius: 5%;
+    margin: 2px;
+    padding: 0.5rem;
 }
 
 /* versus computer game */
-
 
 
 #player-area {
@@ -200,13 +207,10 @@ main {
 }
 
 
-
 /*Footer */
 
 footer {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    padding: 5px;
+    text-align: center;
+    padding: 10px;
     background-color: rgb(196, 128, 3);
 }

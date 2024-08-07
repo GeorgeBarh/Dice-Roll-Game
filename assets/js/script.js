@@ -171,7 +171,7 @@ function addGameHtml() {
     gameArea.innerHTML = `
         <div class="game-questions">
             <div class="game-selection">
-                <p>Choose a game:</p>
+                <p class="two">Choose a game:</p>
                 <button data-type="one-die">One Die</button>
                 <button data-type="two-dice">Two Dice</button>
             </div>
@@ -182,14 +182,13 @@ function addGameHtml() {
                 <button data-type="hard">Hard</button>
             </div>
         </div>
-        <div class="game">
-            <img id="first-die" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
-            <img id="second-die" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
-        </div>
-        
         <div class="score-area">
             <p>Your tries: <span id="tries">0</span></p>
             <p>Your score: <span id="score">0</span></p>
+        </div>
+        <div class="game">
+            <img id="first-die" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
+            <img id="second-die" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
         </div>
         <div>
         <button id="roll-btn" data-type="submit">Roll!</button>
@@ -410,26 +409,27 @@ function versusComputerHtml() {
 </div>
 <div class="game">
     <div id="player-area">
+        <p>Your score: <span id="score">0</span></p>
+
         <img id="player-first-die" src="assets/images/die-1.png" class="dice-result"
             alt="player-firstdie-number-image"></img>
         <img id="player-second-die" src="assets/images/die-1.png" class="dice-result" alt="player-second-die-image"></img>
     </div>
     <div id="computer-area">
+        <p>Computer score: <span id="computer-score">0</span></p>
         <img id="computer-first-die" src="assets/images/die-1.png" class="dice-result"
             alt="computer-firstdie-number-image"></img>
         <img id="computer-second-die" src="assets/images/die-1.png" class="dice-result"
             alt="computer-second-die-image"></img>
     </div>
 </div>
-<div class="score-area">
-    <p>Your score: <span id="score">0</span></p>
+<div class="tries-area>
     <p>Your tries: <span id="tries">0</span></p>
-    <p>Computer score: <span id="computer-score">0</span></p>
 </div>
 <div>
     <button id="roll-btn" data-type="submit">Roll!</button>
 </div>
-<div id="choose-opponent">
+<div id="choose-opponent" class="opponent-computer">
     <button id="choose-opponent-btn">Play single game</button>
 </div>
 `;
