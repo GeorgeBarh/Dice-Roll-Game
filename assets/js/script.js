@@ -59,9 +59,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Define Event Listeners
 
+    /**
+ * Sets up an event listener for the start button click event.
+ * This function attaches a click event listener to the start button. When the start  button is clicked, it triggers the *letsPlay function, which initializes and starts the game.
+ */
+
     function startButtonListener() {
         startButton.addEventListener("click", letsPlay);
     }
+
+    /**
+ * Sets up an event listener for the Enter key press on the start button.
+ * 
+ * This function attaches a keydown event listener to the start button. If the Enter key 
+ * is pressed while the start button is focused, it triggers the letsPlay function, 
+ * which initializes the game and starts the game.
+ */
 
     function enterKeyPressListener() {
         startButton.addEventListener('keydown', function (event) {
@@ -71,6 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /**
+ * Set up an event listener for clicks on the page heading.
+ * 
+ * This function attaches a click event listener to the h1 element on the page. 
+ * When the heading is clicked, it triggers the resetToStart function, which resets 
+ * the game to its initial state and displays the start button and game description.
+ */
     function headingClickedListener() {
         let headingClicked = document.getElementsByTagName('h1')[0];
         headingClicked.addEventListener('click', resetToStart);
@@ -78,42 +98,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// Declare Handlers
 
+//Declare event handlers
+
+/**
+ * This is the game's main function.
+ * Initializes the game interface and sets up event listeners.
+ * This function hides the introductory content, adds the game html to the page
+ * and attaches event listeners for game interactions. It prepares the game for user 
+ * interaction by calling functions to choose the game type, set up difficulty levels, 
+ * and handle the game logic.
+ */
 function letsPlay() {
     hideContent();
-    let gameArea = document.getElementsByClassName('game-area')[0];
-    gameArea.style.display = 'block'; // Make sure the game area is visible after the resetGame() 
-    gameArea.innerHTML = `
-            <div class="game-questions">
-                <div class="game-selection">
-                    <p>Choose a game:</p>
-                    <button data-type="one-die">One Die</button>
-                    <button data-type="two-dice">Two Dice</button>
-                </div>
-                <div class="choose-difficulty">
-                    <p>Choose difficulty level:</p>
-                    <button data-type="easy">Easy</button>
-                    <button data-type="medium">Medium</button>
-                    <button data-type="hard">Hard</button>
-                </div>
-            </div>
-            <div class="game">
-                <img id="firstDie" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
-                <img id="secondDie" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
-            </div>
-            <div>
-            <button id="roll-btn" data-type="submit">Roll!</button>
-            </div>
-            <div class="score-area">
-                <p>Your tries: <span id="tries">0</span></p>
-                <p>Your score: <span id="score">0</span></p>
-            </div>
-            <div class="versus-computer">
-                <p>Do you think you can beat the computer?</p>
-                <button class="versus-computer-btn">Play versus the computer</button>
-            </div>
-        `;
+    addGameHtml();
     // Call the function to attach event listeners after adding content
     chooseGame();
     setUpDifficulty();
@@ -132,6 +130,16 @@ function resetToStart() {
     startButton.focus(); // it sets the startButton on focus after the reset so as the enterKeyPressListener to work again.
 }
 
+// Declare initialization functions
+
+/**
+ * Hides the introductory content and game start button.
+ * 
+ * This function is used to hide elements that are not part of the game area, such as 
+ * the start button and the game description, making the game area visible and ready 
+ * for interaction.
+ */
+
 function hideContent() {
     let startButton = document.getElementById('start-button');
     startButton.style.display = "none";
@@ -139,6 +147,55 @@ function hideContent() {
     gameDescription.style.display = "none";
 }
 
+/**
+ * Adds the game HThtmlL content to the page.
+ * 
+ * This function dynamically generates and inserts the HTML elements required for 
+ * the game interface, including game selection buttons, difficulty levels, dice images, 
+ * roll button, and score area. It ensures that the game interface is displayed to the user.
+ */
+function addGameHtml() {
+    let gameArea = document.getElementsByClassName('game-area')[0];
+    gameArea.style.display = 'block'; // Make sure the game area is visible after the resetGame() 
+    gameArea.innerHTML = `
+        <div class="game-questions">
+            <div class="game-selection">
+                <p>Choose a game:</p>
+                <button data-type="one-die">One Die</button>
+                <button data-type="two-dice">Two Dice</button>
+            </div>
+            <div class="choose-difficulty">
+                <p>Choose difficulty level:</p>
+                <button data-type="easy">Easy</button>
+                <button data-type="medium">Medium</button>
+                <button data-type="hard">Hard</button>
+            </div>
+        </div>
+        <div class="game">
+            <img id="firstDie" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
+            <img id="secondDie" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
+        </div>
+        <div>
+        <button id="roll-btn" data-type="submit">Roll!</button>
+        </div>
+        <div class="score-area">
+            <p>Your tries: <span id="tries">0</span></p>
+            <p>Your score: <span id="score">0</span></p>
+        </div>
+        <div class="versus-computer">
+            <p>Do you think you can beat the computer?</p>
+            <button class="versus-computer-btn">Play versus the computer</button>
+        </div>
+    `;
+}
+
+// Declare game setup Functions
+/**
+ * Sets up event listeners for selecting the game type.
+ * This function attaches click event listeners to the game type selection buttons. 
+ * It updates the `gameTypeSelected` variable based on the user's choice and adjusts 
+ * the game interface accordingly.
+ */
 function chooseGame() {
     // Use querySelectorAll to find the dynamically added buttons
     let gameTypeButtons = document.querySelectorAll('button[data-type="one-die"], button[data-type="two-dice"]');
@@ -164,6 +221,13 @@ function chooseGame() {
     }
 }
 
+/**
+ * Sets up event listeners for selecting the difficulty level.
+ * 
+ * This function attaches click event listeners to the difficulty level selection buttons. 
+ * It updates the `difficultyLevelSelected` variable based on the user's choice and 
+ * alerts the user with the target score for the selected difficulty level.
+ */
 function setUpDifficulty() {
     let difficultyButtons = document.querySelectorAll('button[data-type="easy"], button[data-type="medium"], button[data-type="hard"]');
 
@@ -292,13 +356,18 @@ function checkResult() {
 
 }
 
+// Clear the values of the dice before the game restart
+
 function resetGame() {
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
     firstDieValue = 0;
     secondDieValue = 0;
-    // Clear the values of the dice before the game restart
     // document.getElementById('firstDie').src = '';
     // document.getElementById('secondDie').src = '';
     letsPlay();
 }
+
+// function versusComputer() {
+
+// }
