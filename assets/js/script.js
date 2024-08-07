@@ -1,9 +1,24 @@
-// Declare constants for DOM elements
+// Declare constants and global variables
 
 // This variable will track the selected game type
 let gameTypeSelected = '';
+
 //This variable will trace the selected difficulty level
 let difficultyLevelSelected = '';
+
+
+/*
+* Declare global variables for dice values so as to be updated 
+* in the incrementScore() and runGame() functions 
+*/
+let firstDieValue = 0;
+let secondDieValue = 0;
+
+// The same with above but for the versusComputerGame()
+let playerFirstDieValue = 0;
+let playerSecondDieValue = 0;
+let computerFirstDieValue = 0;
+let computerSecondDieValue = 0;
 
 /*
 *Define target scores for each game type and difficulty level so as to be easier to handle them inside the functions 
@@ -20,13 +35,6 @@ const targets = {
         'hard': 27
     }
 }
-
-/*
-* Declare global variables for dice values so as to be updated 
-* in the incrementScore() and runGame() functions
-*/
-let firstDieValue = 0;
-let secondDieValue = 0;
 
 /*
 *This object includes the images of the die that will display to
@@ -56,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startButtonListener();
     enterKeyPressListener();
     headingClickedListener();
+
 
     // Define Event Listeners
 
@@ -112,13 +121,13 @@ document.addEventListener("DOMContentLoaded", function () {
 function letsPlay() {
     hideContent();
     addGameHtml();
-    // Call the function to attach event listeners after adding content
     chooseGame();
     setUpDifficulty();
     runGame();
     vsComputerClickListener();
-
 }
+
+
 
 function resetToStart() {
     let gameArea = document.getElementsByClassName('game-area')[0];
@@ -174,19 +183,20 @@ function addGameHtml() {
             </div>
         </div>
         <div class="game">
-            <img id="firstDie" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
-            <img id="secondDie" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
+            <img id="first-die" src="assets/images/die-1.png" class="dice-result" alt="firstdie-number-image"></img>
+            <img id="second-die" src="assets/images/die-1.png" class="dice-result" alt="second-die-image"></img>
         </div>
-        <div>
-        <button id="roll-btn" data-type="submit">Roll!</button>
-        </div>
+        
         <div class="score-area">
             <p>Your tries: <span id="tries">0</span></p>
             <p>Your score: <span id="score">0</span></p>
         </div>
-        <div id="versus-computer" class="vs-computer">
+        <div>
+        <button id="roll-btn" data-type="submit">Roll!</button>
+        </div>
+        <div id="choose-opponent">
             <p>Do you think you can beat the computer?</p>
-            <button id="computer-btn" class="versus-computer-btn">Play versus the computer</button>
+            <button id="choose-opponent-btn" class="choose-player-btn">Play versus the computer</button>
         </div>
     `;
 }
@@ -213,11 +223,15 @@ function chooseGame() {
                 alert('You chose to play with One Die! Please select difficulty level.');
 
                 // Hide the second die if the user plays one die game.
-                let secondDieImg = document.getElementById('secondDie');
+                let secondDieImg = document.getElementById('second-die');
                 secondDieImg.style.display = "none";
 
             } else if (gameTypeSelected === 'two-dice') {
                 alert('You chose to play with Two Dice! Please select difficulty level.');
+
+                //Display the second die image if the user play second die game
+                let secondDieImg = document.getElementById('second-die');
+                secondDieImg.style.display = "block";
             }
         });
     }
@@ -259,26 +273,20 @@ function setUpDifficulty() {
 
 function runGame() {
     let rollButton = document.getElementById('roll-btn');
-    let firstDieImage = document.getElementById('firstDie');
-    let secondDieImage = document.getElementById('secondDie');
+    let firstDieImage = document.getElementById('first-die');
+    let secondDieImage = document.getElementById('second-die');
+
 
     rollButton.addEventListener('click', function () {
         if (gameTypeSelected === '') {
             alert("Please select game type and difficulty level.");
             return;
         }
-
-        // Hide the dice initially 
-        firstDieImage.style.display = 'none';
-        secondDieImage.style.display = 'none';
-
-
-        if (gameTypeSelected === 'one-die') {
+        else if (gameTypeSelected === 'one-die') {
             firstDieValue = Math.floor(Math.random() * 6) + 1;
             firstDieImage.src = diceImages[firstDieValue];
-            secondDieImage.src = ''; // Clear the second die
+            // Clear the second die
             secondDieImage.style.display = 'none';
-            console.log(secondDieValue)
         } else if (gameTypeSelected === 'two-dice') {
             firstDieValue = Math.floor(Math.random() * 6) + 1;
             secondDieValue = Math.floor(Math.random() * 6) + 1;
@@ -289,9 +297,6 @@ function runGame() {
 
         // Display the dice images after the delay
 
-        firstDieImage.style.display = 'block';
-        secondDieImage.style.display = gameTypeSelected === 'two-dice' ? 'block' : 'none';
-
         incrementTries();
         incrementScore();
 
@@ -301,6 +306,8 @@ function runGame() {
         }, 300);
     });
 }
+
+
 
 function incrementTries() {
     setTimeout(function () {
@@ -358,33 +365,160 @@ function checkResult() {
 
 }
 
-// Clear the values of the dice before the game restart
+
 
 function resetGame() {
+    // Clear the values of the dice before the game restart
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
     firstDieValue = 0;
     secondDieValue = 0;
-    // document.getElementById('firstDie').src = '';
-    // document.getElementById('secondDie').src = '';
     letsPlay();
 }
 
+// Versus Computer set up
+
 function vsComputerClickListener() {
-    let vsComputerBtn = document.getElementById('computer-btn')
-    vsComputerBtn.addEventListener('click', versusComputerHtml);
+    let vsComputerBtn = document.getElementById('choose-opponent-btn')
+    vsComputerBtn.addEventListener('click', playVsComputer);
 }
 
+function playVsComputer() {
+    versusComputerHtml();
+    chooseGameVsComputer();
+    setUpDifficulty();
+    runComputerGame();
+}
+
+
+
 function versusComputerHtml() {
-    let versusPc = document.getElementsByClassName('game')[0]
+    let versusPc = document.getElementsByClassName('game-area')[0]
     versusPc.innerHTML = `
-            <div id="player-area">
-                <img id="playerFirstDie" src="assets/images/die-1.png" class="dice-result" alt="player-firstdie-number-image"></img>
-                <img id="playerSecondDie" src="assets/images/die-1.png" class="dice-result" alt="player-second-die-image"></img>
-            </div>
-            <div id="computer-area">
-                <img id="computerFirstDie" src="assets/images/die-1.png" class="dice-result" alt="computer-firstdie-number-image"></img>
-                <img id="computerSecondDie" src="assets/images/die-1.png" class="dice-result" alt="computer-second-die-image"></img>
-            </div>
-        `;
+<div class="game-questions">
+    <div class="game-selection">
+        <p>Choose a game:</p>
+        <button data-type="one-die">One Die</button>
+        <button data-type="two-dice">Two Dice</button>
+    </div>
+    <div class="choose-difficulty">
+        <p>Choose difficulty level:</p>
+        <button data-type="easy">Easy</button>
+        <button data-type="medium">Medium</button>
+        <button data-type="hard">Hard</button>
+    </div>
+</div>
+<div class="game">
+    <div id="player-area">
+        <img id="player-first-die" src="assets/images/die-1.png" class="dice-result"
+            alt="player-firstdie-number-image"></img>
+        <img id="player-second-die" src="assets/images/die-1.png" class="dice-result" alt="player-second-die-image"></img>
+    </div>
+    <div id="computer-area">
+        <img id="computer-first-die" src="assets/images/die-1.png" class="dice-result"
+            alt="computer-firstdie-number-image"></img>
+        <img id="computer-second-die" src="assets/images/die-1.png" class="dice-result"
+            alt="computer-second-die-image"></img>
+    </div>
+</div>
+<div class="score-area">
+    <p>Your score: <span id="score">0</span></p>
+    <p>Your tries: <span id="tries">0</span></p>
+    <p>Computer score: <span id="computer-score">0</span></p>
+</div>
+<div>
+    <button id="roll-btn" data-type="submit">Roll!</button>
+</div>
+<div id="choose-opponent">
+    <button id="choose-opponent-btn">Play single game</button>
+</div>
+`;
+}
+
+function chooseGameVsComputer() {
+    // Use querySelectorAll to find the dynamically added buttons
+    let gameTypeButtons = document.querySelectorAll('button[data-type="one-die"], button[data-type="two-dice"]');
+
+    for (let i = 0; i < gameTypeButtons.length; i++) {
+        let gameTypeButton = gameTypeButtons[i];
+
+        gameTypeButton.addEventListener('click', function () {
+            // Check which button was clicked based on its data-type attribute, tracks the selection of the user 
+            gameTypeSelected = this.getAttribute('data-type');
+
+            if (gameTypeSelected === 'one-die') {
+                alert('You chose to compete the computer with One Die! Please select difficulty level.');
+
+                // Hide the players second die if the user plays one die game.
+                let playerSecondDieImg = document.getElementById('player-second-die');
+                playerSecondDieImg.style.display = "none";
+                // Hide the computers second die if the user plays one die game.
+                let computerSecondDieImg = document.getElementById('computer-second-die')
+                computerSecondDieImg.style.display = 'none'
+
+            } else if (gameTypeSelected === 'two-dice') {
+                alert('You chose to compete the computer with Two Dice! Please select difficulty level.');
+
+                //Display the players second die image if the user click two dice  game
+                let playerSecondDieImg = document.getElementById('player-second-die');
+                playerSecondDieImg.style.display = "block";
+                //Display the computers second die image if the user click two dice  game
+                let computerSecondDieImg = document.getElementById('computer-second-die')
+                computerSecondDieImg.style.display = 'block'
+
+            }
+        });
+    }
+}
+
+function runComputerGame() {
+    let rollBtn = document.getElementById('roll-btn');
+    let playerFirstDieImage = document.getElementById('player-first-die')
+    let playerSecondDieImage = document.getElementById('player-second-die')
+    let computerFirstDieImage = document.getElementById('computer-first-die')
+    let computerSecondDieImage = document.getElementById('computer-second-die')
+
+    rollBtn.addEventListener('click', function () {
+        if (gameTypeSelected === '') {
+            alert("Please select game type and difficulty level.");
+            return;
+        }
+        else if (gameTypeSelected === 'one-die') {
+            // Players die
+            playerFirstDieValue = Math.floor(Math.random() * 6) + 1;
+            playerFirstDieImage.src = diceImages[playerFirstDieValue];
+            // Hides players the second die
+            playerSecondDieImage.style.display = 'none'
+            //Computers die
+            computerFirstDieValue = Math.floor(Math.random() * 6) + 1
+            computerFirstDieImage.src = diceImages[computerFirstDieValue]
+            // Hides computers second die
+            computerSecondDieImage.style.display = 'none'
+        }
+        else if (gameTypeSelected === 'two-dice') {
+            //Players dice
+            playerFirstDieValue = Math.floor(Math.random() * 6) + 1;
+            playerFirstDieImage.src = diceImages[playerFirstDieValue];
+            playerSecondDieValue = Math.floor(Math.random() * 6) + 1;
+            playerSecondDieImage.src = diceImages[playerSecondDieValue]
+            //Computers dice
+            computerFirstDieValue = Math.floor(Math.random() * 6) + 1;
+            computerFirstDieImage.src = diceImages[computerFirstDieValue];
+            computerSecondDieValue = Math.floor(Math.random() * 6) + 1;
+            computerSecondDieImage.src = diceImages[computerSecondDieValue];
+
+            // Display the second die again
+            computerSecondDieImage.style.display = 'block'
+
+            //Display the dice images after the delay
+            incrementTries();
+            incrementScore();
+
+            //checkResult is called after the score and tries updates are visible
+            setTimeout(function () {
+                checkResult();
+            }, 300);
+        }
+    })
+
 }

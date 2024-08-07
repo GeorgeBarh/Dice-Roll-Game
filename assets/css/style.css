@@ -181,17 +181,19 @@ main {
     font-size: 130%;
 }
 
-.vs-computer>* {
+#choose-opponent>* {
     padding: 10px;
 }
 
-.vs-computer button {
+#choose-opponent-btn {
     margin-bottom: 70px;
     font-size: 100%;
     border-radius: 5%;
 }
 
 /* versus computer game */
+
+
 
 #player-area {
     border: 2px solid red;
