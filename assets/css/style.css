@@ -171,6 +171,14 @@ main {
     justify-content: space-around;
     text-align: center;
     padding-top: 15px;
+    font-size: 120%;
+    font-weight: 800;
+}
+
+#tries,
+#score {
+    color: rgb(254, 253, 253);
+    font-size: 130%;
 }
 
 .versus-computer>* {
@@ -192,5 +200,5 @@ footer {
     width: 100%;
     bottom: 0;
     padding: 5px;
-    background-color: rgb(255, 165, 0);
+    background-color: rgb(196, 128, 3);
 }

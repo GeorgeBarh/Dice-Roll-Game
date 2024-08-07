@@ -228,16 +228,21 @@ function runGame() {
 
         incrementTries();
         incrementScore();
-        checkResult();
 
+        //checkResult is called after the score and tries updates are visible
+        setTimeout(function () {
+            checkResult(); // 
+        }, 200);
     });
 }
 
 function incrementTries() {
-    let tries = document.getElementById('tries');
-    let currentTries = parseInt(tries.innerText);
-    updatedTries = ++currentTries;
-    tries.innerText = updatedTries;
+    setTimeout(function () {
+        let tries = document.getElementById('tries');
+        let currentTries = parseInt(tries.innerText);
+        updatedTries = ++currentTries;
+        tries.innerText = updatedTries;
+    }, 100) // Adjust the same delay with incrementScore() in order the score and tries to be displayed at the same time.
 }
 
 function incrementScore() {
@@ -250,7 +255,7 @@ function incrementScore() {
         let updatedScore = currentScore + firstDieValue + secondDieValue;
 
         document.getElementById('score').innerText = updatedScore;
-    }, 500); // Adjust the delay duration as needed (500ms in this case)
+    }, 100); // Adjust the delay duration so as to show the score after the dice images are fully loaded.
 }
 
 function checkResult() {
@@ -259,32 +264,29 @@ function checkResult() {
     let scoreNumber = parseInt(document.getElementById('score').innerText);
 
     // Check if the number of tries is exactly 3
-    if (numberOfTries === 3) {
-        setTimeout(function () {
-            let targetScore;
+    if (numberOfTries == 3) {
+        let targetScore;
 
-            if (gameTypeSelected === 'one-die') {
-                targetScore = targets['one-die'][difficultyLevelSelected];
+        if (gameTypeSelected === 'one-die') {
+            targetScore = targets['one-die'][difficultyLevelSelected];
 
-                if (scoreNumber >= targetScore) {
-                    alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
-                }
-
-            } else if (gameTypeSelected === 'two-dice') {
-                targetScore = targets['two-dice'][difficultyLevelSelected];
-
-                if (scoreNumber >= targetScore) {
-                    alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
-                } else {
-                    alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
-                }
+            if (scoreNumber >= targetScore) {
+                alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
+            } else {
+                alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
             }
 
-            resetGame();
+        } else if (gameTypeSelected === 'two-dice') {
+            targetScore = targets['two-dice'][difficultyLevelSelected];
 
-        }, 600); // 600 milliseconds delay to ensure the alert message will be displayed only after the score is updated.
+            if (scoreNumber >= targetScore) {
+                alert(`Well done! The target was ${targetScore} and you rolled a ${scoreNumber}!`);
+            } else {
+                alert(`That's too bad... You rolled a ${scoreNumber} and the target was ${targetScore}. Maybe next time you will be luckier!`);
+            }
+        }
+
+        resetGame();
     }
 
 
@@ -293,6 +295,8 @@ function checkResult() {
 function resetGame() {
     document.getElementById('tries').innerText = '0';
     document.getElementById('score').innerText = '0';
+    firstDieValue = 0;
+    secondDieValue = 0;
     // Clear the values of the dice before the game restart
     // document.getElementById('firstDie').src = '';
     // document.getElementById('secondDie').src = '';
