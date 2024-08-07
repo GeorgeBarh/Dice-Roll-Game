@@ -182,14 +182,21 @@ function addGameHtml() {
                 <button data-type="hard">Hard</button>
             </div>
         </div>
-        <div class="score-area">
-            <p>Your tries: <span id="tries">0</span></p>
-            <p>Your score: <span id="score">0</span></p>
-        </div>
+
         <div class="game">
-            <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
-            <img id="second-die" src="assets/images/die-1.png" class="dice-images" alt="second-die-image"></img>
+            <div>
+                <p>Your score: <span id="score">0</span></p>
+            </div>
+            <div class="images-box">   
+                <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
+                <img id="second-die" src="assets/images/die-1.png" class="dice-images" alt="second-die-image"></img>
+            </div>
+            <div>
+                <p>Your tries: <span id="tries">0</span></p>
+            </div>
+
         </div>
+
         <div>
         <button id="roll-btn" data-type="submit">Roll!</button>
         </div>
@@ -322,9 +329,9 @@ function incrementScore() {
     // setTimeout to introduce a delay before updating the score
 
     setTimeout(function () {
-        let currentScore = parseInt(document.getElementById('score').innerText) || 0;
+        let currentScore = parseInt(document.getElementById('score').innerText);
 
-        let updatedScore = currentScore + firstDieValue + secondDieValue;
+        let updatedScore = currentScore + firstDieValue + secondDieValue || 0;
 
         document.getElementById('score').innerText = updatedScore;
     }, 250); // Adjust the delay duration so as to show the score after the dice images are fully loaded.
@@ -375,7 +382,7 @@ function resetGame() {
     letsPlay();
 }
 
-// Versus Computer set up
+// Versus Computer Game set up
 
 function vsComputerClickListener() {
     let vsComputerBtn = document.getElementById('choose-opponent-btn')
@@ -408,24 +415,26 @@ function versusComputerHtml() {
     </div>
 </div>
 <div class="game">
-    <div id="player-area">
-        <p>Your score: <span id="score">0</span></p>
-
-        <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
+    <div class = player-vs-computer>
+        <div id="player-area">
+            <p>Player: <span id="player-score">0</span></p>
+            <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="player-firstdie-number-image"></img>
-        <img id="player-second-die" src="assets/images/die-1.png" class="dice-images" alt="player-second-die-image"></img>
-    </div>
-    <div id="computer-area">
-        <p>Computer score: <span id="computer-score">0</span></p>
-        <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images"
+            <img id="player-second-die" src="assets/images/die-1.png" class="dice-images" alt="player-second-die-image"></img>
+        </div>
+        <div id="computer-area">
+            <p> Computer: <span id="computer-score">0</span></p>
+            <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images"
             alt="computer-firstdie-number-image"></img>
-        <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images"
+            <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images"
             alt="computer-second-die-image"></img>
+        </div>
+    </div>
+    <div class="tries-area">
+        <p>Your tries: <span id="tries">0</span></p>
     </div>
 </div>
-<div class="tries-area">
-    <p>Your tries: <span id="tries">0</span></p>
-</div>
+
 <div>
     <button id="roll-btn" data-type="submit">Roll!</button>
 </div>
@@ -510,15 +519,87 @@ function runComputerGame() {
             // Display the second die again
             computerSecondDieImage.style.display = 'block'
 
-            //Display the dice images after the delay
-            incrementTries();
-            incrementScore();
-
-            //checkResult is called after the score and tries updates are visible
-            setTimeout(function () {
-                checkResult();
-            }, 300);
         }
+
+        //Display the dice images after the delay
+        incrementTries();
+        playerIncrementScore();
+        computerIncrementScore();
+        //checkResult is called after the score and tries updates are visible
+        setTimeout(function () {
+            checkResultVsComputer();
+        }, 300);
     })
 
+}
+
+function playerIncrementScore() {
+    setTimeout(function () {
+        // Get the current score and ensure it's a number, defaulting to 0 if not
+        let playerCurrentScore = parseInt(document.getElementById('player-score').innerText) || 0;
+
+        // Calculate the updated score
+        let playerUpdatedScore = playerCurrentScore + playerFirstDieValue + (playerSecondDieValue || 0);
+
+        // Update the score in the DOM
+        document.getElementById('player-score').innerText = playerUpdatedScore;
+    }, 250); // Adjust the delay duration if needed
+}
+
+function computerIncrementScore() {
+    setTimeout(function () {
+        let computerCurrentScore = parseInt(document.getElementById('computer-score').innerText);
+
+        let computerUpdatedScore = computerCurrentScore + computerFirstDieValue + (computerSecondDieValue || 0);
+
+        document.getElementById('computer-score').innerText = computerUpdatedScore;
+    }, 250);
+}
+
+function checkResultVsComputer() {
+    // Convert score elements to numbers
+    let playerScore = parseInt(document.getElementById('player-score').innerText, 10);
+    let computerScore = parseInt(document.getElementById('computer-score').innerText, 10);
+    let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
+
+    // Check if the number of tries is exactly 3
+    if (numberOfTries === 3) {
+        let scoreTarget;
+
+        if (gameTypeSelected === 'one-die') {
+            scoreTarget = targets['one-die'][difficultyLevelSelected];
+        } else if (gameTypeSelected === 'two-dice') {
+            scoreTarget = targets['two-dice'][difficultyLevelSelected];
+        }
+
+        // Determine the winner based on the scores and target score
+        let resultMessage;
+
+        if (playerScore >= scoreTarget && computerScore >= scoreTarget) {
+            if (playerScore > computerScore) {
+                resultMessage = `Congratulations! You won! Your score was ${playerScore} and the computer's score was ${computerScore}.`;
+            } else if (playerScore < computerScore) {
+                resultMessage = `You lost. Your score was ${playerScore} and the computer's score was ${computerScore}.`;
+            } else {
+                resultMessage = `It's a tie! Both you and the computer scored ${playerScore}.`;
+            }
+        }
+
+        alert(resultMessage);
+
+        resetVersusComputerGame();
+    }
+}
+
+function resetVersusComputerGame() {
+    // Clear the values of the dice before the game restart
+    document.getElementById('tries').innerText = '0';
+    document.getElementById('player-score').innerText = '0';
+    document.getElementById('computer-score').innerText = '0';
+
+    playerFirstDieValue = 0;
+    playerSecondDieValue = 0;
+    computerFirstDieValue = 0;
+    computerSecondDieValue = 0;
+    playVsComputer();
 }

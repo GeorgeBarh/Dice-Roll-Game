@@ -19,12 +19,6 @@ body {
 
 /* Header */
 
-
-main,
-footer {
-    padding: 0 10px;
-}
-
 h1 {
     font-family: "Luckiest Guy", sans-serif;
     letter-spacing: 2px;
@@ -34,6 +28,9 @@ h1 {
     background-color: rgb(255, 165, 0);
     cursor: pointer;
     border: 2px solid transparent;
+    box-shadow: 0 8px 10px rgba(235, 40, 40, 0.2);
+    border-radius: 0 0 6px 6px;
+
 }
 
 h1:hover {
@@ -50,12 +47,18 @@ main button {
     /* Reserve space for the border */
 }
 
+button {
+    box-shadow: 0 0 2px 2px rgba(94, 61, 2, 0.5);
+
+}
+
 button:focus,
 button:hover {
-    transition: border-color 0.3s ease;
+    transition: border-color 0.4s ease;
     border: 2px solid black;
     /* Smooth transition for border color */
     outline: none;
+
 
 }
 
@@ -75,6 +78,10 @@ button:hover {
 .font-icons {
     font-size: 180%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
 }
 
 .font-icons i {
@@ -91,7 +98,7 @@ button:hover {
     font-family: "Luckiest Guy", sans-serif;
     cursor: pointer;
     background-color: rgb(255, 165, 0);
-    margin-top: 5px;
+    /* margin-top: 5px; */
     border: 2px solid transparent;
 }
 
@@ -120,7 +127,7 @@ main {
 .game-questions {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     height: auto;
 }
 
@@ -137,6 +144,7 @@ main {
 
 .game-questions p {
     font-size: 110%;
+    margin-bottom: 5px;
 }
 
 .game-selection button {
@@ -145,14 +153,24 @@ main {
 
 
 .game {
-    border: 1px solid black;
     height: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 1rem;
+    margin: 1.5rem 0.5rem;
+    background-color: rgba(181, 180, 179, 0.8);
+    box-shadow: 0 0 5px 5px rgba(189, 4, 4, 0.3);
+
 }
+
+.images-box {
+    display: flex;
+    padding: 1rem;
+}
+
 
 .dice-images {
     width: 7rem;
@@ -168,15 +186,6 @@ main {
     margin: 10px;
     font-size: 100%;
     border-radius: 5%;
-}
-
-.score-area {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 120%;
-    font-weight: 800;
 }
 
 #tries,
@@ -199,20 +208,46 @@ main {
     border-radius: 5%;
     margin: 2px;
     padding: 0.5rem;
+    margin-bottom: 15px;
 }
 
 /* versus computer game */
 
+.player-vs-computer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
 
 #player-area {
     border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
 }
+
+#computer-area {
+    border: 2px solid yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
 
 
 /*Footer */
 
 footer {
+    margin-top: 17px;
     text-align: center;
     padding: 10px;
     background-color: rgb(196, 128, 3);
+    box-shadow: 0 -4px 10px rgba(235, 40, 40, 0.3);
+    border-radius: 8px 8px 0 0;
 }
