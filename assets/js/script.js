@@ -392,7 +392,6 @@ function vsComputerClickListener() {
 function playVsComputer() {
     versusComputerHtml();
     chooseGameVsComputer();
-    setUpDifficulty();
     runComputerGame();
 }
 
@@ -406,12 +405,6 @@ function versusComputerHtml() {
         <p>Choose a game:</p>
         <button data-type="one-die">One Die</button>
         <button data-type="two-dice">Two Dice</button>
-    </div>
-    <div class="choose-difficulty">
-        <p>Choose difficulty level:</p>
-        <button data-type="easy">Easy</button>
-        <button data-type="medium">Medium</button>
-        <button data-type="hard">Hard</button>
     </div>
 </div>
 <div class="game">
@@ -456,7 +449,7 @@ function chooseGameVsComputer() {
             gameTypeSelected = this.getAttribute('data-type');
 
             if (gameTypeSelected === 'one-die') {
-                alert('You chose to compete the computer with One Die! Please select difficulty level.');
+                alert('You chose to compete the computer with One Die! Whoever brings the higher number wins!');
 
                 // Hide the players second die if the user plays one die game.
                 let playerSecondDieImg = document.getElementById('player-second-die');
@@ -466,7 +459,7 @@ function chooseGameVsComputer() {
                 computerSecondDieImg.style.display = 'none'
 
             } else if (gameTypeSelected === 'two-dice') {
-                alert('You chose to compete the computer with Two Dice! Please select difficulty level.');
+                alert('You chose to compete the computer with Two Dice! Whoever brings the higher number wins!');
 
                 //Display the players second die image if the user click two dice  game
                 let playerSecondDieImg = document.getElementById('player-second-die');
@@ -489,7 +482,7 @@ function runComputerGame() {
 
     rollBtn.addEventListener('click', function () {
         if (gameTypeSelected === '') {
-            alert("Please select game type and difficulty level.");
+            alert("Please select game type to start the game!Good luck!");
             return;
         }
         else if (gameTypeSelected === 'one-die') {
