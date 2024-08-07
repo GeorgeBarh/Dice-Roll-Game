@@ -116,6 +116,8 @@ function letsPlay() {
     chooseGame();
     setUpDifficulty();
     runGame();
+    vsComputerClickListener();
+
 }
 
 function resetToStart() {
@@ -182,9 +184,9 @@ function addGameHtml() {
             <p>Your tries: <span id="tries">0</span></p>
             <p>Your score: <span id="score">0</span></p>
         </div>
-        <div class="versus-computer">
+        <div id="versus-computer" class="vs-computer">
             <p>Do you think you can beat the computer?</p>
-            <button class="versus-computer-btn">Play versus the computer</button>
+            <button id="computer-btn" class="versus-computer-btn">Play versus the computer</button>
         </div>
     `;
 }
@@ -368,6 +370,21 @@ function resetGame() {
     letsPlay();
 }
 
-// function versusComputer() {
+function vsComputerClickListener() {
+    let vsComputerBtn = document.getElementById('computer-btn')
+    vsComputerBtn.addEventListener('click', versusComputerHtml);
+}
 
-// }
+function versusComputerHtml() {
+    let versusPc = document.getElementsByClassName('game')[0]
+    versusPc.innerHTML = `
+            <div id="player-area">
+                <img id="playerFirstDie" src="assets/images/die-1.png" class="dice-result" alt="player-firstdie-number-image"></img>
+                <img id="playerSecondDie" src="assets/images/die-1.png" class="dice-result" alt="player-second-die-image"></img>
+            </div>
+            <div id="computer-area">
+                <img id="computerFirstDie" src="assets/images/die-1.png" class="dice-result" alt="computer-firstdie-number-image"></img>
+                <img id="computerSecondDie" src="assets/images/die-1.png" class="dice-result" alt="computer-second-die-image"></img>
+            </div>
+        `;
+}
