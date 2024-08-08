@@ -116,11 +116,16 @@ button:hover {
 * Make the main element take up any surplus space to push the footer down
 * Appears only when the "Lets play" button is clicked
 */
+#introduction {
+    display: flex;
+    flex: 1 0 auto;
+}
+
 main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 0 1 auto;
 }
 
 .game-area {
