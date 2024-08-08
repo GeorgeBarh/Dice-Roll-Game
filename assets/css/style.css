@@ -133,7 +133,8 @@ button:hover {
 }
 
 #instructions * {
-    padding: 2px;
+    list-style-type: none;
+    padding: 2px 5px;
     color: rgb(255, 165, 0);
 
 }
