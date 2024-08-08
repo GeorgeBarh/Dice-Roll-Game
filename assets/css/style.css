@@ -190,6 +190,8 @@ main {
 }
 
 
+
+
 .game {
     height: auto;
     display: flex;
@@ -299,6 +301,17 @@ main {
     padding-right: 0.5rem;
 }
 
+.player-area p,
+span {
+    margin-right: 10px;
+}
+
+.computer-area p,
+span {
+    margin-left: 10px;
+}
+
+
 .computer-area {
     display: flex;
     flex-direction: column;
@@ -322,7 +335,7 @@ main {
 footer {
     margin-top: 17px;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     background-color: rgb(196, 128, 3);
     box-shadow: 0 -3px 3px 2px rgba(235, 40, 40, 0.3);
     border-radius: 8px 8px 0 0;

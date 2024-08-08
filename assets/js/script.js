@@ -158,7 +158,7 @@ function resetToStart() {
 function hideContent() {
     let startButton = document.getElementById('start-button');
     startButton.style.display = "none";
-    let gameDescription = document.getElementById('game-description');
+    let gameDescription = document.getElementById('instructions');
     gameDescription.style.display = "none";
 }
 
@@ -471,7 +471,7 @@ function versusComputerHtml() {
 <div class="game">
     <div class="player-vs-computer">
         <div id="player-area" class="player-area">
-            <p>Player: <span id="player-score" class="counter-style">0</span></p>
+            <p>Player score: <span id="player-score" class="counter-style">0</span></p>
             <div class="dice-container">
                 <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
                     alt="player-firstdie-number-image">
@@ -480,7 +480,7 @@ function versusComputerHtml() {
             </div>
         </div>
         <div id="computer-area" class="computer-area">
-            <p>Computer: <span id="computer-score" class="counter-style">0</span></p>
+            <p>Computer score: <span id="computer-score" class="counter-style">0</span></p>
             <div class="dice-container">
                 <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images dice"
                     alt="computer-firstdie-number-image">
