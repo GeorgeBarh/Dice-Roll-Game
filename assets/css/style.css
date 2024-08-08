@@ -5,14 +5,9 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
 
 body {
-
+    height: 100vh;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -25,9 +20,6 @@ body {
 
 
 /* Header */
-header {
-    height: 100vh;
-}
 
 
 h1 {
@@ -132,7 +124,7 @@ main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1 0 auto;
 }
 
 .game-area {
