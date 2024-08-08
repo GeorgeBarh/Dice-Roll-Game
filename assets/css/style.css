@@ -183,6 +183,10 @@ main {
     border-radius: 5%;
 }
 
+.choose-difficulty button {
+    margin: 7px;
+}
+
 .game-area p {
     font-size: 110%;
     margin-bottom: 15px;
