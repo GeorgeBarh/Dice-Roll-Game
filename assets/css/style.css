@@ -123,7 +123,7 @@ button:hover {
     cursor: pointer;
     background-color: rgb(255, 165, 0);
     border: 2px solid transparent;
-
+    letter-spacing: 8px;
     margin: 15px auto;
 }
 

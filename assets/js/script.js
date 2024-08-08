@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
  * and handle the game logic.
  */
 function letsPlay() {
-
     addGameHtml();
     hideContent();
     chooseGame();
@@ -709,9 +708,6 @@ function checkResultVsComputer() {
     let playerScore = parseInt(document.getElementById('player-score').innerText, 10);
     let computerScore = parseInt(document.getElementById('computer-score').innerText, 10);
     let numberOfTries = parseInt(document.getElementById('tries').innerText, 10);
-
-    // Ensure the winner element exists
-    let winner = document.getElementById('winner');
 
     // Check if the number of tries is exactly 3
     if (numberOfTries === 3) {
