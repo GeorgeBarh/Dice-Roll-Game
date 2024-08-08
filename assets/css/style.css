@@ -5,8 +5,14 @@
     box-sizing: border-box;
 }
 
+html,
 body {
-    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -17,8 +23,11 @@ body {
 }
 
 
-/* Header */
 
+/* Header */
+header {
+    height: 100vh;
+}
 
 
 h1 {
