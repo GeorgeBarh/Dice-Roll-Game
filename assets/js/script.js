@@ -6,6 +6,7 @@ let gameTypeSelected = '';
 //This variable will trace the selected difficulty level
 let difficultyLevelSelected = '';
 
+
 //This variable will trace the target score based on the difficulty level and the game type
 let targetScore = 0;
 

@@ -5,8 +5,14 @@
     box-sizing: border-box;
 }
 
+html,
 body {
-    height: 100vh;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    height: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -14,6 +20,28 @@ body {
     font-weight: 600;
     background-color: lightgrey;
 
+}
+
+/*
+* Make the main element take up any surplus space to push the footer down
+* Appears only when the "Lets play" button is clicked
+*/
+main {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/*Footer */
+
+footer {
+    /* margin-top: 17px; */
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(196, 128, 3);
+    box-shadow: 0 -4px 10px rgba(235, 40, 40, 0.3);
+    border-radius: 8px 8px 0 0;
 }
 
 
@@ -111,17 +139,7 @@ button:hover {
     border: 2px solid black;
 }
 
-/*
-* Main
-* Make the main element take up any surplus space to push the footer down
-* Appears only when the "Lets play" button is clicked
-*/
-main {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
-}
+
 
 .game-area {
     display: flex;
@@ -197,9 +215,8 @@ main {
 }
 
 .dice-size {
-    width: 4rem;
-    height: 5rem;
-    object-fit: contain;
+    width: 5.2rem;
+    height: 5.2rem;
 }
 
 /* Creates a rolling dice animation by rotating the dice on the X and Y axes. */
@@ -293,16 +310,6 @@ main {
 }
 
 
-/*Footer */
-
-footer {
-    margin-top: 17px;
-    text-align: center;
-    padding: 10px;
-    background-color: rgb(196, 128, 3);
-    box-shadow: 0 -4px 10px rgba(235, 40, 40, 0.3);
-    border-radius: 8px 8px 0 0;
-}
 
 /*Styling from tablet (768px) and above */
 
