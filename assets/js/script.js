@@ -175,14 +175,14 @@ function addGameHtml() {
         <div class="game-questions">
             <div class="game-selection">
                 <p class="two">Choose a game type:</p>
-                <button data-type="one-die">One Die</button>
-                <button data-type="two-dice">Two Dice</button>
+                <button class="game-settings-btn" data-type="one-die">One Die</button>
+                <button class="game-settings-btn" data-type="two-dice">Two Dice</button>
             </div>
             <div class="choose-difficulty">
                 <p>Choose difficulty level:</p>
-                <button data-type="easy">Easy</button>
-                <button data-type="medium">Medium</button>
-                <button data-type="hard">Hard</button>
+                <button class="game-settings-btn"  data-type="easy">Easy</button>
+                <button class="game-settings-btn" data-type="medium">Medium</button>
+                <button class="game-settings-btn" data-type="hard">Hard</button>
             </div>
         </div>
 
@@ -463,8 +463,8 @@ function versusComputerHtml() {
 <div class="game-questions">
     <div class="game-selection">
         <p>Choose a game type:</p>
-        <button data-type="one-die">One Die</button>
-        <button data-type="two-dice">Two Dice</button>
+        <button class="game-settings-btn" data-type="one-die">One Die</button>
+        <button class="game-settings-btn" data-type="two-dice">Two Dice</button>
     </div>
 </div>
 <div class="game">

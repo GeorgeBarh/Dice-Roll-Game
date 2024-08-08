@@ -187,6 +187,7 @@ main {
     display: flex;
     padding: 1rem;
     justify-content: center;
+
 }
 
 .dice-images {
@@ -279,8 +280,6 @@ main {
     flex-direction: column;
     align-items: center;
     padding-left: 0.5rem;
-    border: 1px solid black;
-    /* padding: 30px 0; */
 }
 
 .dice-container {
@@ -353,6 +352,17 @@ footer {
         width: 25rem;
     }
 
+    .game-settings-btn {
+        width: 15rem;
+        height: 4rem;
+        font-size: 5px;
+        font-weight: 600;
+    }
+
+    .game p {
+        margin: 0 5rem;
+    }
+
 
     .game {
         width: 95%;
@@ -360,9 +370,141 @@ footer {
         margin-left: auto;
     }
 
+    .images-box>img:first-child {
+        padding-right: 2.2rem;
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .images-box>img:last-child {
+        padding-left: 2.2rem;
+        width: 15rem;
+        height: 15rem;
+    }
+
     .font-icons>* {
         font-size: 120%;
         margin: 0 10px;
+    }
+
+    /* Versus Computer*/
+
+    .computer-area {
+        padding-left: 2.2rem;
+    }
+
+    .player-area {
+        padding-right: 2.2rem;
+    }
+
+    .dice-size {
+        width: 9.5rem;
+        height: 9.5rem;
+        object-fit: contain;
+    }
+
+}
+
+@media (min-width:1024px) {
+    body {
+        font-size: 140%;
+    }
+
+    h1 {
+        height: 10.5rem;
+        font-size: 500%;
+    }
+
+    h1 span {
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    footer {
+        padding: 2rem;
+    }
+
+
+
+    #start-button {
+        border-radius: 25px;
+        font-size: 270%;
+    }
+
+
+    #roll-btn {
+        font-size: 160%;
+        letter-spacing: 1px;
+        width: 15rem;
+    }
+
+    #choose-opponent-btn {
+        font-size: 110%;
+        border-radius: 5%;
+        margin: 2px;
+        padding: 0.5rem;
+        margin-bottom: 15px;
+        width: 25rem;
+    }
+
+    .game-settings-btn {
+        width: 15rem;
+        height: 4rem;
+        font-size: 5px;
+        font-weight: 600;
+    }
+
+    .game p {
+        margin: 0 5rem;
+    }
+
+
+    .game {
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .images-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .images-box>img:first-child {
+        width: 19rem;
+        height: 19rem;
+    }
+
+    .images-box>img:last-child {
+        width: 19rem;
+        height: 19rem;
+    }
+
+
+    .dice-images {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    .dice-size {
+        width: 13rem;
+        height: 13rem;
+    }
+
+    .font-icons>* {
+        font-size: 120%;
+        margin: 0 10px;
+    }
+
+    /* Versus Computer*/
+
+    .computer-area {
+        padding-left: 2.2rem;
+    }
+
+    .player-area {
+        padding-right: 2.2rem;
     }
 
 }
