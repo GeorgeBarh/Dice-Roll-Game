@@ -22,6 +22,18 @@ body {
 
 }
 
+header {
+    height: 80vh;
+    /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center content vertically */
+    align-items: center;
+    /* Center content horizontally */
+    text-align: center;
+}
+
 /*
 * Make the main element take up any surplus space to push the footer down
 * Appears only when the "Lets play" button is clicked
@@ -30,6 +42,8 @@ main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 1;
 }
 
