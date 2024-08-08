@@ -74,7 +74,6 @@ button:hover {
     text-align: center;
     align-items: center;
     gap: 20px;
-    flex: 1 0 auto;
 }
 
 .introduction p {
@@ -120,15 +119,11 @@ button:hover {
 * Appears only when the "Lets play" button is clicked
 */
 
-header {
-    display: flex;
-    flex-direction: column;
-}
-
 main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .game-area {
