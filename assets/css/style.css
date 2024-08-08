@@ -5,87 +5,38 @@
     box-sizing: border-box;
 }
 
-/* Ensure html and body take up full height */
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
+
 
 body {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
     background-color: lightgrey;
-    display: flex;
-    flex-direction: column;
-    /* Ensure vertical stacking of header, main, footer */
+
 }
 
-/* Header styling */
-header {
-    flex-shrink: 0;
-    /* Prevent header from shrinking */
-    height: 100vh;
-    /* Full viewport height */
-    background-color: rgb(255, 165, 0);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
 
-h1 {
-    font-family: "Luckiest Guy", sans-serif;
-    font-size: 350%;
-    margin: 0;
-}
 
-#game-description {
-    font-size: 1.2rem;
-    padding: 0 15px;
-}
-
-.font-icons {
-    font-size: 180%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 5px;
-}
-
-#start-button {
-    width: 70%;
-    height: 6rem;
-    border-radius: 5%;
-    font-size: 200%;
-    background-color: rgb(255, 165, 0);
-    border: 2px solid transparent;
-    margin-top: 20px;
-}
-
-#start-button:hover,
-#start-button:focus {
-    border: 2px solid black;
-}
-
-/* Main styling */
+/*
+* Make the main element take up any surplus space to push the footer down
+* Appears only when the "Lets play" button is clicked
+*/
 main {
-    flex: 1;
-    /* Allow main to expand and take up remaining space */
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 20px;
-    background-color: #fff;
+    align-items: center;
+    flex: 1;
 }
 
-/* Footer styling */
+/*Footer */
+
 footer {
-    flex-shrink: 0;
-    /* Prevent footer from shrinking */
+    margin-top: 17px;
     text-align: center;
     padding: 10px;
     background-color: rgb(196, 128, 3);
@@ -94,60 +45,9 @@ footer {
 }
 
 
-/* Asterisk wildcard selector to override default styles added by the browser */
-/* * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-} */
-
-/* html,
-body {
-    height: 100%;
-    margin: 0;
-} */
-
-/* body {
-    /* height: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 600;
-    background-color: lightgrey;
-
-} */
-
-
-
-/*
-* Make the main element take up any surplus space to push the footer down
-* Appears only when the "Lets play" button is clicked
-*/
-/* main {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-} */
-
-/*Footer */
-
-/* footer {
-    margin-top: 17px;
-text-align: center;
-padding: 10px;
-background-color: rgb(196, 128, 3);
-box-shadow: 0 -4px 10px rgba(235, 40, 40, 0.3);
-border-radius: 8px 8px 0 0;
-}
- */
-
 /* Header */
 
-/* h1 {
+h1 {
     font-family: "Luckiest Guy", sans-serif;
     letter-spacing: 2px;
     text-align: center;
@@ -157,7 +57,7 @@ border-radius: 8px 8px 0 0;
     cursor: pointer;
     border: 2px solid transparent;
     box-shadow: 0 8px 10px rgba(235, 40, 40, 0.2);
-    border-radius: 0 0 6px 6px; */
+    border-radius: 0 0 6px 6px;
 
 }
 
