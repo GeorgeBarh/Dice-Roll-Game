@@ -6,7 +6,7 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
+    flex: 1;
 }
 
 .game-area {
@@ -406,11 +406,11 @@ footer {
 
 @media (min-width:1024px) {
     body {
-        font-size: 140%;
+        font-size: 150%;
     }
 
     h1 {
-        height: 10.5rem;
+        height: 12.5rem;
         font-size: 500%;
     }
 
