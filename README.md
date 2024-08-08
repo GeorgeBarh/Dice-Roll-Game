@@ -15,9 +15,6 @@
     - [Score Tracking](#score-tracking)
 3. [Testing](#testing)
     - [Manual Testing](#manual-testing)
-    - [Bugs](#bugs)
-    - [Lighthouse - Performance](#lighthouse-performance)
-    - [Lighthouse - Accessibility](#lighthouse-accessibility)
     - [Validator Testing](#validator-testing)
 4. [Deployment](#deployment)
     - [Deployment Steps](#deployment-steps)
@@ -52,9 +49,36 @@ Roll the Dice is a fully responsive game that offers a range of dice-rolling sce
 - **As the site owner**, I want to encourage user engagement by showcasing exciting aspects of the game and/or any new updates so that users remain interested and motivated to keep playing.
 - **As the site owner**, I want to collect user feedback and suggestions to improve the game and address any issues so that I can make informed updates and enhance the overall user experience.
 
-## 1.3 Features
+# 1.3 Design
 
-### 1.3.1 Single Game
+![Screenshot of start page](assets/images/README.images/start.png)
+
+The roll dice game website was made to give the user a clear and fun experiance. The point is the user to enjoy it without being complicated.
+
+### Design and User Experience
+
+- The website uses a simple design. It’s clean so you can focus on the game and not get distractd. I used playfull font familys i and animations, like the spinning dice so as to make the game make more engaging and improve user's experience.
+
+### Semantic Markup
+
+- We use semantic HTML to make the page easy to undrstand and good for search engines. This helps both users and search engines find and navigate the page better.
+
+### Color Scheme
+
+- The colors were picked to make the game more fun and keep the site looking good. The main background is dark to make the game elements stand out. The header and footer are lighter to show different parts of the page and create an intense but tasteful contrast. This helps you find the menu and game areas easliy while keeping a nice look.
+
+### Responsiveness
+
+- Media queries make sure the website works well on all screen sizes. Whether the user is on the phone or a big computer screen, the site adjusts to look good and work right. .
+
+### Flexbox Layout
+
+- The Flexbox we used, arranges the page in columns so you can scroll through the content and play the game easliy on any device. The design is readable, whether you’re on a small phone or a large monitir.
+
+
+## 2 Features
+
+### 2.1 Single Game
 
 ![Screenshot of singlegame](assets/images/README.images/gametype.png)
 ![Screenshot of singlegame](assets/images/README.images/game.png)
@@ -132,7 +156,7 @@ Roll the Dice is a fully responsive game that offers a range of dice-rolling sce
 - **Function**: `vsComputerClickListener()`
 - **Description**: Adds a click event listener to the "Play versus the computer" button. When clicked, it calls `playVsComputer()`, which starts the game against the computer.
 
-### 1.3.2 Versus Computer Game
+## 2.2 Versus Computer Game
 
 ![Screenshot of computer game](assets/images/README.images/computergametype.png) 
 ![Screenshot of computer game](assets/images/README.images/computer.png)  
@@ -174,35 +198,10 @@ Roll the Dice is a fully responsive game that offers a range of dice-rolling sce
 - **Function**: `playSingeGameListener()`
 - **Description**: Attaches a click event listener to the "Play single game" button to start a single game when clicked.
 
-# 1.4 Design
 
-![Screenshot of start page](assets/images/README.images/start.png)
+## 3 Testing
 
-The roll dice game website was made to give the user a clear and fun experiance. The point is the user to enjoy it without being complicated.
-
-### Design and User Experience
-
-- The website uses a simple design. It’s clean so you can focus on the game and not get distractd. I used playfull font familys i and animations, like the spinning dice so as to make the game make more engaging and improve user's experience.
-
-### Semantic Markup
-
-- We use semantic HTML to make the page easy to undrstand and good for search engines. This helps both users and search engines find and navigate the page better.
-
-### Color Scheme
-
-- The colors were picked to make the game more fun and keep the site looking good. The main background is dark to make the game elements stand out. The header and footer are lighter to show different parts of the page and create an intense but tasteful contrast. This helps you find the menu and game areas easliy while keeping a nice look.
-
-### Responsiveness
-
-- Media queries make sure the website works well on all screen sizes. Whether the user is on the phone or a big computer screen, the site adjusts to look good and work right. .
-
-### Flexbox Layout
-
-- The Flexbox we used, arranges the page in columns so you can scroll through the content and play the game easliy on any device. The design is readable, whether you’re on a small phone or a large monitir.
-
-## 1.5 Testing
-
-### 1.5.1 Manual Testing
+### 3.1 Manual Testing
 
  1. Every combination of gametype and difficulty in the Single Game is working properly; Displays the correct score,the correct number of tries, and the correct target based on the difficulty and the game type. 
 
@@ -212,7 +211,7 @@ The roll dice game website was made to give the user a clear and fun experiance.
 
   4. All the buttons and functions have been tested and working as appropriate.
 
-###  1.5.2 Validator Testing
+###  3.2 Validator Testing
 
 - **HTML**: Validated with [W3C validator](https://validator.w3.org/).
 
@@ -248,7 +247,7 @@ Metrics include:
 
 **Testing Status**: Verified for smooth and engaging animations. Ensures that dice roll animations are visually appealing and functional.
 
-## 1.6 Deployment
+## 4. Deployment
 
 The Roll the Dice application has been deployed using GitHub Pages. The deployment process involved the following steps:
 
@@ -275,9 +274,9 @@ The live link to the deployed application can be found [here](https://georgebarh
  ![Screenshot of deployment expectations](assets/images/README.images/start.png)
 
 
- ## 1.8 Credits
+ ## 5 Credits
 
-  ### 1.8.1 Content
+  ### 5.1 Content
   - Instructions about the whole structure of the project were taken from the CI [Love Running](https://github.com/Code-Institute-Org/love-running-2.0) project and the videos from the first module and second module
 
   - Additional istructions about difficulties to implement some function was taken from [ChatGPT](https://chatgpt.com/).
