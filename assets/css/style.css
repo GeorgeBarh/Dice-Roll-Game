@@ -19,6 +19,8 @@ body {
 
 /* Header */
 
+
+
 h1 {
     font-family: "Luckiest Guy", sans-serif;
     letter-spacing: 2px;
@@ -72,6 +74,7 @@ button:hover {
     text-align: center;
     align-items: center;
     gap: 20px;
+    flex: 1 0 auto;
 }
 
 .introduction p {
@@ -116,16 +119,16 @@ button:hover {
 * Make the main element take up any surplus space to push the footer down
 * Appears only when the "Lets play" button is clicked
 */
-#introduction {
+
+header {
     display: flex;
-    flex: 1 0 auto;
+    flex-direction: column;
 }
 
 main {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    flex: 0 1 auto;
 }
 
 .game-area {
