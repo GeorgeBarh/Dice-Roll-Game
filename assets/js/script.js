@@ -182,7 +182,7 @@ function addGameHtml() {
             <div class="choose-difficulty">
                 <p>Choose difficulty level:</p>
                 <button class="game-settings-btn"  data-type="easy">Easy</button>
-                <button class="game-settings-btn" data-type="medium">Medium</button>
+                <button class="game-settings-btn medium" data-type="medium">Medium</button>
                 <button class="game-settings-btn" data-type="hard">Hard</button>
             </div>
         </div>
@@ -282,6 +282,11 @@ function setUpDifficulty() {
     }
 }
 
+
+/**
+ *  * This function updates the text content of the target score element with the current target score
+ */
+
 function updateTargetScoreHtml() {
     let scoreGoal = document.getElementById('goal');
     if (scoreGoal) {
@@ -340,7 +345,9 @@ function runGame() {
     });
 }
 
-
+/**
+ * This function updates the tries display in the HTML in the single game (not in *the versus computer game)
+ *  */
 
 function incrementTries() {
     setTimeout(function () {
@@ -350,6 +357,12 @@ function incrementTries() {
         tries.innerText = updatedTries;
     }, 250) // Adjust the same delay with incrementScore() in order the score and tries to be displayed at the same time.
 }
+
+/**
+ * /**
+ * This function updates the score and display in the *HTML in the single game (not in *the versus computer *game)
+   */
+
 
 function incrementScore() {
 
@@ -363,6 +376,11 @@ function incrementScore() {
         document.getElementById('score').innerText = updatedScore;
     }, 250); // Adjust the delay duration so as to show the score after the dice images are fully loaded.
 }
+
+/**
+ *compares the player's score with the target score after *3 tries,
+ * and updates the result display with a win or lose message.
+ */
 
 function checkResult() {
     // Convert these elements to numbers
@@ -423,11 +441,21 @@ function resetGame() {
 
 // Versus Computer Game set up
 
+/**
+ * Sets up event listener for playing against the pc.
+ * This function attach a click event listener to the button for playing vs the computer.
+ */
+
 function vsComputerClickListener() {
     let vsComputerBtn = document.getElementById('choose-opponent-btn')
     vsComputerBtn.addEventListener('click', playVsComputer)
 }
 
+/** 
+ * This is the main function the of game againist the computer
+ * This function updates the game HTML for the versus computer mode, sets up event listeners,
+ * and adjusts the dice image sizes based on the selected game type.
+ */
 function playVsComputer() {
     versusComputerHtml();
 
@@ -436,9 +464,8 @@ function playVsComputer() {
     let computerFirstDieImage = document.getElementById('computer-first-die')
     let computerSecondDieImage = document.getElementById('computer-second-die')
 
-    // Update class for dice image size so as to fit inside the game area when the the game vs computer is two dice
+    // Update class for dice image size so as to fit inside the game area when the the game vs computer in two dice game needs four images
 
-    // Update class for dice image size so as to fit inside the game area
     playerFirstDieImage.classList.remove('dice-images');
     playerSecondDieImage.classList.remove('dice-images');
     computerFirstDieImage.classList.remove('dice-images');
@@ -504,6 +531,12 @@ function versusComputerHtml() {
 `;
 }
 
+
+/**
+ * Sets up event listeners for selecting the game type when playing against the computer.
+ * This function attaches click event listeners to the game type selection buttons,
+ * updates the selected game type, and adjusts the dice image display based on the selection.
+ */
 function chooseGameVsComputer() {
     // Use querySelectorAll to find the dynamically added buttons
     let gameTypeButtons = document.querySelectorAll('button[data-type="one-die"], button[data-type="two-dice"]');
@@ -610,6 +643,8 @@ function runComputerGame() {
             // Display the second die again
             computerSecondDieImage.style.display = 'block'
 
+            computerSecondDieImage.style.display = 'block'
+
             // Add the small size class for two-dice game
 
             playerFirstDieImage.classList.add('dice-size');
@@ -623,7 +658,7 @@ function runComputerGame() {
         incrementTries();
         playerIncrementScore();
         computerIncrementScore();
-        //checkResult is called after the score and tries updates are visible
+        //checkResult is called after the score and tries function updates are visible
         setTimeout(function () {
             playerFirstDieImage.classList.remove('dice');
             playerSecondDieImage.classList.remove('dice');
@@ -634,6 +669,11 @@ function runComputerGame() {
     })
 
 }
+
+
+/**
+ * Update the players score and display it in the HTML.
+ */
 
 function playerIncrementScore() {
     setTimeout(function () {
@@ -648,6 +688,10 @@ function playerIncrementScore() {
     }, 250); // Adjust the delay duration if needed
 }
 
+/**
+ * Update the computer's score and display it in the HTML.
+ */
+
 function computerIncrementScore() {
     setTimeout(function () {
         let computerCurrentScore = parseInt(document.getElementById('computer-score').innerText);
@@ -658,6 +702,9 @@ function computerIncrementScore() {
     }, 250);
 }
 
+/*
+* Check the player#s score, the computer's score and the *tries and announce the winner. Then reset the game.
+*/
 function checkResultVsComputer() {
     // Convert score elements to numbers
     let playerScore = parseInt(document.getElementById('player-score').innerText, 10);
@@ -697,6 +744,10 @@ function resetVersusComputerGame() {
     computerSecondDieValue = 0;
     playVsComputer();
 }
+
+/**
+ * This function attaches click event listener to the choose opponent button in order the user to play single game
+ */
 
 function playSingeGameListener() {
     let playSingeGameBtn = document.getElementById('choose-opponent-btn')
