@@ -173,42 +173,41 @@ function addGameHtml() {
     let gameArea = document.getElementsByClassName('game-area')[0];
     gameArea.style.display = 'block'; // Make sure the game area is visible after the resetGame() 
     gameArea.innerHTML = `
-        <div class="game-questions">
-            <div class="game-selection">
-                <p class="two">Choose a game type:</p>
-                <button class="game-settings-btn" data-type="one-die">One Die</button>
-                <button class="game-settings-btn" data-type="two-dice">Two Dice</button>
-            </div>
-            <div class="choose-difficulty">
-                <p>Choose difficulty level:</p>
-                <button class="game-settings-btn"  data-type="easy">Easy</button>
-                <button class="game-settings-btn medium" data-type="medium">Medium</button>
-                <button class="game-settings-btn" data-type="hard">Hard</button>
-            </div>
+    <div class="game-questions">
+        <div class="game-selection">
+            <p class="two">Choose a game type:</p>
+            <button class="game-settings-btn" data-type="one-die" aria-label="Select game with one die">One Die</button>
+            <button class="game-settings-btn" data-type="two-dice" aria-label="Select game with two dice">Two Dice</button>
         </div>
+        <div class="choose-difficulty">
+            <p>Choose difficulty level:</p>
+            <button class="game-settings-btn" data-type="easy" aria-label="Select easy difficulty">Easy</button>
+            <button class="game-settings-btn medium" data-type="medium" aria-label="Select medium difficulty">Medium</button>
+            <button class="game-settings-btn" data-type="hard" aria-label="Select hard difficulty">Hard</button>
+        </div>
+    </div>
 
-        <div class="game">
-            <div class="score-area">
-                <p>Your score: <span id="score" class="counter-style">0</span></p>
-                <p>Your target: <span id ="goal" class="counter-style">${targetScore}</span></p>
-            </div>
-            <div class="images-box">   
-                <img id="first-die" src="assets/images/die-1.png" class="dice-images dice" alt="firstdie-number-image"></img>
-                <img id="second-die" src="assets/images/die-1.png" class="dice-images dice" alt="second-die-image"></img>
-            </div>
-            <div>
-                <p>Your tries: <span id="tries" class="counter-style">0</span></p>
-            </div>
+<div class="game">
+    <div class="score-area">
+        <p>Your score: <span id="score" class="counter-style">0</span></p>
+        <p>Your target: <span id="goal" class="counter-style">${targetScore}</span></p>
+    </div>
+    <div class="images-box">   
+        <img id="first-die" src="assets/images/die-1.png" class="dice-images dice" alt="Die showing one" aria-label="First die showing one">
+        <img id="second-die" src="assets/images/die-1.png" class="dice-images dice" alt="Die showing one" aria-label="Second die showing one">
+    </div>
+    <div>
+        <p>Your tries: <span id="tries" class="counter-style">0</span></p>
+    </div>
+</div>
 
-        </div>
-
-        <div>
-        <button id="roll-btn" data-type="submit">Roll!</button>
-        </div>
-        <div id="choose-opponent">
-            <p>Do you think you can beat the computer?</p>
-            <button id="choose-opponent-btn" class="choose-player-btn">Play versus the computer</button>
-        </div>
+<div>
+    <button id="roll-btn" data-type="submit" aria-label="Roll the dice">Roll!</button>
+</div>
+<div id="choose-opponent">
+    <p>Do you think you can beat the computer?</p>
+    <button id="choose-opponent-btn" class="choose-player-btn" aria-label="Play versus the computer">Play versus the computer</button>
+</div>
     `;
 }
 
@@ -491,28 +490,29 @@ function versusComputerHtml() {
 <div class="game-questions">
     <div class="game-selection">
         <p>Choose a game type:</p>
-        <button class="game-settings-btn" data-type="one-die">One Die</button>
-        <button class="game-settings-btn" data-type="two-dice">Two Dice</button>
+        <button class="game-settings-btn" data-type="one-die" aria-label="Select game with one die">One Die</button>
+        <button class="game-settings-btn" data-type="two-dice" aria-label="Select game with two dice">Two Dice</button>
     </div>
 </div>
+
 <div class="game">
     <div class="player-vs-computer">
         <div id="player-area" class="player-area">
             <p>Player score: <span id="player-score" class="counter-style">0</span></p>
             <div class="dice-container">
                 <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
-                    alt="player-firstdie-number-image">
+                    alt="Player's first die showing one" aria-label="Player's first die showing one">
                 <img id="player-second-die" src="assets/images/die-1.png" class="dice-images"
-                    alt="player-second-die-image">
+                    alt="Player's second die showing one" aria-label="Player's second die showing one">
             </div>
         </div>
         <div id="computer-area" class="computer-area">
             <p>Computer score: <span id="computer-score" class="counter-style">0</span></p>
             <div class="dice-container">
                 <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images dice"
-                    alt="computer-firstdie-number-image">
+                    alt="Computer's first die showing one" aria-label="Computer's first die showing one">
                 <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images dice"
-                    alt="computer-second-die-image">
+                    alt="Computer's second die showing one" aria-label="Computer's second die showing one">
             </div>
         </div>
     </div>
@@ -520,13 +520,12 @@ function versusComputerHtml() {
         <p>Your tries: <span id="tries" class="counter-style">0</span></p>
     </div>
 </div>
-   
 
 <div>
-    <button id="roll-btn" data-type="submit">Roll!</button>
+    <button id="roll-btn" data-type="submit" aria-label="Roll the dice">Roll!</button>
 </div>
-<div id="choose-opponent" >
-    <button id="choose-opponent-btn">Play single game</button>
+<div id="choose-opponent">
+    <button id="choose-opponent-btn" aria-label="Play single game">Play single game</button>
 </div>
 `;
 }
