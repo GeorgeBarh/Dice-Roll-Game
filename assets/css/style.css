@@ -188,12 +188,21 @@ main {
     margin: 7px;
 }
 
+.game p {
+    font-size: 120%;
+    margin-bottom: 15px;
+    color: rgb(255, 165, 0);
+    font-family: 'Luckiest guy', sans-serif;
+    letter-spacing: 1px;
+}
+
 .game-area p {
     font-size: 110%;
     margin-bottom: 15px;
     color: rgb(255, 165, 0);
+    letter-spacing: 1px;
 
-    ;
+
 }
 
 .game-selection button {
