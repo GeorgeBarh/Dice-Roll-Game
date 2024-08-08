@@ -138,7 +138,7 @@ function resetToStart() {
     gameArea.style.display = 'none';
     let startBtn = document.getElementById('start-button');
     startBtn.style.display = 'block';
-    let gameIntro = document.getElementById('game-description');
+    let gameIntro = document.getElementById('instructions');
     gameIntro.style.display = "block";
 
     let startButton = document.getElementById('start-button');
