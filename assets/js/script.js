@@ -335,7 +335,7 @@ function runGame() {
             firstDieImage.classList.remove('dice');
             secondDieImage.classList.remove('dice');
             checkResult(); // 
-        }, 300);
+        }, 600);
     });
 }
 
@@ -424,11 +424,32 @@ function resetGame() {
 
 function vsComputerClickListener() {
     let vsComputerBtn = document.getElementById('choose-opponent-btn')
-    vsComputerBtn.addEventListener('click', playVsComputer);
+    vsComputerBtn.addEventListener('click', playVsComputer)
 }
 
 function playVsComputer() {
     versusComputerHtml();
+
+    let playerFirstDieImage = document.getElementById('player-first-die')
+    let playerSecondDieImage = document.getElementById('player-second-die')
+    let computerFirstDieImage = document.getElementById('computer-first-die')
+    let computerSecondDieImage = document.getElementById('computer-second-die')
+
+    // Update class for dice image size so as to fit inside the game area when the the game vs computer is two dice
+
+    // Update class for dice image size so as to fit inside the game area
+    playerFirstDieImage.classList.remove('dice-images');
+    playerSecondDieImage.classList.remove('dice-images');
+    computerFirstDieImage.classList.remove('dice-images');
+    computerSecondDieImage.classList.remove('dice-images');
+
+    playerFirstDieImage.classList.add('dice-size');
+    playerSecondDieImage.classList.add('dice-size');
+    computerFirstDieImage.classList.add('dice-size');
+    computerSecondDieImage.classList.add('dice-size');
+
+
+
     chooseGameVsComputer();
     runComputerGame();
     playSingeGameListener();
@@ -447,25 +468,31 @@ function versusComputerHtml() {
     </div>
 </div>
 <div class="game">
-    <div class = player-vs-computer>
-        <div id="player-area">
+    <div class="player-vs-computer">
+        <div id="player-area" class="player-area">
             <p>Player: <span id="player-score" class="counter-style">0</span></p>
-            <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
-            alt="player-firstdie-number-image"></img>
-            <img id="player-second-die" src="assets/images/die-1.png" class="dice-images" alt="player-second-die-image"></img>
+            <div class="dice-container">
+                <img id="player-first-die" src="assets/images/die-1.png" class="dice-images"
+                    alt="player-firstdie-number-image">
+                <img id="player-second-die" src="assets/images/die-1.png" class="dice-images"
+                    alt="player-second-die-image">
+            </div>
         </div>
-        <div id="computer-area">
-            <p> Computer: <span id="computer-score" class="counter-style">0</span></p>
-            <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images"
-            alt="computer-firstdie-number-image"></img>
-            <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images"
-            alt="computer-second-die-image"></img>
+        <div id="computer-area" class="computer-area">
+            <p>Computer: <span id="computer-score" class="counter-style">0</span></p>
+            <div class="dice-container">
+                <img id="computer-first-die" src="assets/images/die-1.png" class="dice-images dice"
+                    alt="computer-firstdie-number-image">
+                <img id="computer-second-die" src="assets/images/die-1.png" class="dice-images dice"
+                    alt="computer-second-die-image">
+            </div>
         </div>
     </div>
     <div class="tries-area">
         <p>Your tries: <span id="tries" class="counter-style">0</span></p>
     </div>
 </div>
+   
 
 <div>
     <button id="roll-btn" data-type="submit">Roll!</button>
@@ -480,6 +507,13 @@ function chooseGameVsComputer() {
     // Use querySelectorAll to find the dynamically added buttons
     let gameTypeButtons = document.querySelectorAll('button[data-type="one-die"], button[data-type="two-dice"]');
 
+    let playerFirstDieImg = document.getElementById('player-first-die');
+    let playerSecondDieImg = document.getElementById('player-second-die');
+
+    let computerFirstDieImg = document.getElementById('computer-first-die');
+    let computerSecondDieImg = document.getElementById('computer-second-die')
+
+
     for (let i = 0; i < gameTypeButtons.length; i++) {
         let gameTypeButton = gameTypeButtons[i];
 
@@ -490,22 +524,38 @@ function chooseGameVsComputer() {
             if (gameTypeSelected === 'one-die') {
                 alert('You chose to compete the computer with One Die! Whoever roll the higher number wins!');
 
-                // Hide the players second die if the user plays one die game.
-                let playerSecondDieImg = document.getElementById('player-second-die');
-                playerSecondDieImg.style.display = "none";
                 // Hide the computers second die if the user plays one die game.
-                let computerSecondDieImg = document.getElementById('computer-second-die')
+                playerSecondDieImg.style.display = "none";
+
+                // Update the class in order the images to be larger since when they are only two, they fit in the game.
+                playerFirstDieImg.classList.remove('dice-size');
+                playerFirstDieImg.classList.add('dice-images');
+
+                // Hide the computers second die if the user plays one die game.
+
                 computerSecondDieImg.style.display = 'none'
+
+                computerFirstDieImg.classList.remove('dice-size');
+                computerFirstDieImg.classList.add('dice-images');
+
 
             } else if (gameTypeSelected === 'two-dice') {
                 alert('You chose to compete the computer with Two Dice! Whoever roll the higher number wins!');
 
-                //Display the players second die image if the user click two dice  game
-                let playerSecondDieImg = document.getElementById('player-second-die');
+
+                //Display the players second die image if the user click two dice game
                 playerSecondDieImg.style.display = "block";
+
+                // Update the class again so as to make the images smaller and able to fit in the game area
+                playerFirstDieImg.classList.remove('dice-images');
+                playerFirstDieImg.classList.add('dice-size');
+
                 //Display the computers second die image if the user click two dice  game
-                let computerSecondDieImg = document.getElementById('computer-second-die')
                 computerSecondDieImg.style.display = 'block'
+
+                // Update the class again so as to make the images smaller and able to fit in the game area
+                computerFirstDieImg.classList.remove('dice-images');
+                computerFirstDieImg.classList.add('dice-size');
 
             }
         });
@@ -524,7 +574,14 @@ function runComputerGame() {
             alert("Please select game type to start the game! Good luck!");
             return;
         }
-        else if (gameTypeSelected === 'one-die') {
+
+        // Add animation class
+        playerFirstDieImage.classList.add('dice');
+        playerSecondDieImage.classList.add('dice');
+        computerFirstDieImage.classList.add('dice');
+        computerSecondDieImage.classList.add('dice');
+
+        if (gameTypeSelected === 'one-die') {
             // Players die
             playerFirstDieValue = Math.floor(Math.random() * 6) + 1;
             playerFirstDieImage.src = diceImages[playerFirstDieValue];
@@ -537,6 +594,7 @@ function runComputerGame() {
             computerSecondDieImage.style.display = 'none'
         }
         else if (gameTypeSelected === 'two-dice') {
+
             //Players dice
             playerFirstDieValue = Math.floor(Math.random() * 6) + 1;
             playerFirstDieImage.src = diceImages[playerFirstDieValue];
@@ -551,6 +609,13 @@ function runComputerGame() {
             // Display the second die again
             computerSecondDieImage.style.display = 'block'
 
+            // Add the small size class for two-dice game
+
+            playerFirstDieImage.classList.add('dice-size');
+            playerSecondDieImage.classList.add('dice-size');
+            computerFirstDieImage.classList.add('dice-size');
+            computerSecondDieImage.classList.add('dice-size');
+
         }
 
         //Display the dice images after the delay
@@ -559,8 +624,12 @@ function runComputerGame() {
         computerIncrementScore();
         //checkResult is called after the score and tries updates are visible
         setTimeout(function () {
+            playerFirstDieImage.classList.remove('dice');
+            playerSecondDieImage.classList.remove('dice');
+            computerFirstDieImage.classList.remove('dice');
+            computerSecondDieImage.classList.remove('dice');
             checkResultVsComputer();
-        }, 300);
+        }, 600);
     })
 
 }

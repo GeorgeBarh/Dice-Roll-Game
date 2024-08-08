@@ -179,18 +179,26 @@ main {
     box-shadow: 0 0 5px 5px rgba(189, 4, 4, 0.3);
 }
 
+.game img {
+    padding: 2px;
+}
+
 .images-box {
     display: flex;
     padding: 1rem;
     justify-content: center;
 }
 
-
 .dice-images {
     width: 8rem;
-    height: 8rem;
+    height: 8.5rem;
     object-fit: contain;
-    padding: 10px;
+}
+
+.dice-size {
+    width: 4rem;
+    height: 5rem;
+    object-fit: contain;
 }
 
 /* Creates a rolling dice animation by rotating the dice on the X and Y axes. */
@@ -255,30 +263,35 @@ main {
 
 .player-vs-computer {
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
 }
 
-#player-area {
-    border: 2px solid red;
+.player-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    flex: 1;
+    padding-right: 0.5rem;
 }
 
-#computer-area {
-    border: 2px solid yellow;
+.computer-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    flex: 1;
+    padding-left: 0.5rem;
+    border: 1px solid black;
+    /* padding: 30px 0; */
 }
 
+.dice-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.tries-area {
+    margin-top: 1.2rem;
+}
 
 
 /*Footer */
@@ -340,8 +353,11 @@ footer {
         width: 25rem;
     }
 
-    #game {
-        width: 70%;
+
+    .game {
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .font-icons>* {
