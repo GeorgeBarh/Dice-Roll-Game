@@ -182,16 +182,45 @@ main {
 .images-box {
     display: flex;
     padding: 1rem;
+    justify-content: center;
 }
 
 
 .dice-images {
-    width: 7rem;
-    height: 7rem;
+    width: 8rem;
+    height: 8rem;
     object-fit: contain;
     padding: 10px;
-    height: auto;
 }
+
+/* Creates a rolling dice animation by rotating the dice on the X and Y axes. */
+
+@keyframes roll {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateX(180deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateX(180deg) rotateY(180deg);
+    }
+
+    75% {
+        transform: rotateX(0deg) rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}
+
+.dice {
+    animation: roll 0.5s ease-in-out;
+}
+
 
 #roll-btn {
     width: 50%;
@@ -283,6 +312,11 @@ footer {
 
     footer {
         padding: 2rem;
+    }
+
+    .dice-images {
+        width: 12rem;
+        height: 12rem;
     }
 
     #start-button {

@@ -192,8 +192,8 @@ function addGameHtml() {
                 <p>Your target: <span id ="goal" class="counter-style">${targetScore}</span></p>
             </div>
             <div class="images-box">   
-                <img id="first-die" src="assets/images/die-1.png" class="dice-images" alt="firstdie-number-image"></img>
-                <img id="second-die" src="assets/images/die-1.png" class="dice-images" alt="second-die-image"></img>
+                <img id="first-die" src="assets/images/die-1.png" class="dice-images dice" alt="firstdie-number-image"></img>
+                <img id="second-die" src="assets/images/die-1.png" class="dice-images dice" alt="second-die-image"></img>
             </div>
             <div>
                 <p>Your tries: <span id="tries" class="counter-style">0</span></p>
@@ -307,7 +307,12 @@ function runGame() {
             return; // Exit the function if any selection is missing
         }
 
-        else if (gameTypeSelected === 'one-die') {
+        // Add animation class
+        firstDieImage.classList.add('dice');
+        secondDieImage.classList.add('dice');
+
+        // Check game type and update dice values and images
+        if (gameTypeSelected === 'one-die') {
             firstDieValue = Math.floor(Math.random() * 6) + 1;
             firstDieImage.src = diceImages[firstDieValue];
             // Clear the second die
@@ -327,6 +332,8 @@ function runGame() {
 
         //checkResult is called after the score and tries updates are visible
         setTimeout(function () {
+            firstDieImage.classList.remove('dice');
+            secondDieImage.classList.remove('dice');
             checkResult(); // 
         }, 300);
     });
