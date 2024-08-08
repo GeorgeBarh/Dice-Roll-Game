@@ -86,16 +86,32 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     padding: 5px;
     color: rgb(255, 165, 0);
 
 }
 
+/*
+* /* Defines a keyframe animation that starts the *rotation at 0 degrees and ends at 360(ful circle
+*/
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .font-icons i {
     padding: 0 5px;
+    animation: rotate 10s linear infinite;
+    /* Rotate the icons continuously */
 
 }
+
 
 
 #start-button {
